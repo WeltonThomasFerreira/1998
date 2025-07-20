@@ -17,9 +17,10 @@ export const GAMES_DATA: Game[] = [
     players: '2 a 5 jogadores',
     type: 'Cartas',
     image: 'https://placehold.co/400x200/ADD8E6/000000?text=Yaniv',
-    description: 'Um jogo de cartas rápido e estratégico onde o objetivo é ter a menor pontuação na mão.',
+    description:
+      'Um jogo de cartas rápido e estratégico onde o objetivo é ter a menor pontuação na mão.',
     rulesPath: 'assets/rules/yaniv.md',
     categories: ['Cartas', 'Multiplayer', 'Estratégia'],
-    decksUsed: 1
-  }
+    decksUsed: 1,
+  },
 ];

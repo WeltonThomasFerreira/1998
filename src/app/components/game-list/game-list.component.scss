@@ -1,0 +1,33 @@
+@use "../../../styles.scss" as s;
+
+.header {
+  text-align: center;
+  margin-bottom: s.$spacing-xl;
+
+  h1 {
+    font-size: s.$font-size-3xl;
+    margin-bottom: s.$spacing-sm;
+    color: var(--primary-color);
+  }
+
+  p {
+    font-size: s.$font-size-md;
+    color: var(--text-color-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: s.$spacing-lg;
+
+  @media (min-width: s.$breakpoint-mobile) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: s.$breakpoint-tablet) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

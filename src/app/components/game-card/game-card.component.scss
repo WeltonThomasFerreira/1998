@@ -1,0 +1,29 @@
+@use "../../../styles.scss" as s;
+
+.game-card {
+  cursor: pointer;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  mat-card-content {
+    p {
+      margin-bottom: s.$spacing-md;
+    }
+  }
+
+  mat-chip-listbox {
+    margin-top: s.$spacing-md;
+  }
+
+  mat-card-actions {
+    padding: s.$spacing-sm s.$spacing-md !important;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

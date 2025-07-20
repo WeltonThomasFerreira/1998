@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" class="main-toolbar">
+  <div class="toolbar-content">
+    <a routerLink="/" class="logo-container">
+      <mat-icon svgIcon="cards-playing"></mat-icon>
+      <span>1998 - Jogos de Baralho</span>
+    </a>
+    <button mat-icon-button (click)="toggleTheme()" aria-label="Toggle theme">
+      <mat-icon>{{ home.isDarkTheme() ? "light_mode" : "dark_mode" }}</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer">
+  <p>&copy; {{ home.currentYear }} - Todos os direitos reservados.</p>
+</footer>
