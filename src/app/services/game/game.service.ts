@@ -5,7 +5,7 @@ import { Game, GAMES_DATA } from '../../data/games.data';
   providedIn: 'root',
 })
 export class GameService {
-  private _games: WritableSignal<Game[]> = signal<Game[]>([]);
+  private readonly _games: WritableSignal<Game[]> = signal<Game[]>([]);
   public readonly games: Signal<Game[]> = this._games.asReadonly();
 
   constructor() {
@@ -15,7 +15,6 @@ export class GameService {
   private loadGames(): void {
     setTimeout(() => {
       this._games.set(GAMES_DATA);
-      console.log('Jogos carregados:', this._games());
     }, 500);
   }
 

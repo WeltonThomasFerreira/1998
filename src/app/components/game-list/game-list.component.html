@@ -1,8 +1,8 @@
 <div class="game-list-container">
   <h2 class="list-title">{{ listTitle }}</h2>
 
-  @for (game of games(); track game.id) {
-    <mat-grid-list [cols]="getGridCols()" rowHeight="fit" gutterSize="16px">
+  <mat-grid-list [cols]="getGridCols()" rowHeight="fit" gutterSize="16px">
+    @for (game of games(); track game.id) {
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-card class="game-card mat-elevation-z4">
           <mat-card-header>
@@ -24,13 +24,15 @@
               color="primary"
               [routerLink]="['/games', game.id]"
             >
-              <mat-icon>book</mat-icon> Ver Regras
+              <mat-icon>book</mat-icon> {{ viewRulesButtonLabel }}
             </button>
           </mat-card-actions>
         </mat-card>
       </mat-grid-tile>
-    </mat-grid-list>
-  } @empty {
+    }
+  </mat-grid-list>
+
+  @if (games().length === 0) {
     <div class="no-games-message">
       {{ noGamesMessage }}
     </div>

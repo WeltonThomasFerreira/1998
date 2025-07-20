@@ -20,26 +20,10 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  private readonly _welcomeTitle: string = 'Bem-vindo ao 1998';
-  private readonly _welcomeSubtitle: string =
+  public readonly welcomeTitle: string = 'Bem-vindo ao 1998';
+  public readonly welcomeSubtitle: string =
     'Descubra jogos incríveis para jogar com amigos!';
-  private readonly _cardText: string =
+  public readonly cardText: string =
     'Aqui você encontrará uma coleção de jogos interessantes, começando com os clássicos de baralho. Prepare-se para a diversão!';
-  private readonly _exploreButtonLabel: string = 'Explorar Jogos';
-
-  public get welcomeTitle(): string {
-    return this._welcomeTitle;
-  }
-
-  public get welcomeSubtitle(): string {
-    return this._welcomeSubtitle;
-  }
-
-  public get cardText(): string {
-    return this._cardText;
-  }
-
-  public get exploreButtonLabel(): string {
-    return this._exploreButtonLabel;
-  }
+  public readonly exploreButtonLabel: string = 'Explorar Jogos';
 }

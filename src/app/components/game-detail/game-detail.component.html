@@ -15,18 +15,18 @@
       />
       <mat-card-content>
         <div class="section-description">
-          <h3 class="section-title">Descrição</h3>
+          <h3 class="section-title">{{ descriptionSectionTitle }}</h3>
           <p class="section-text">{{ game()!.description }}</p>
         </div>
 
         <div class="section-rules">
-          <h3 class="section-title">Regras do Jogo</h3>
+          <h3 class="section-title">{{ rulesSectionTitle }}</h3>
           <div class="markdown-content" [innerHTML]="sanitizedRules()"></div>
         </div>
       </mat-card-content>
       <mat-card-actions class="game-detail-actions">
         <button mat-button [routerLink]="['/games']">
-          <mat-icon>arrow_back</mat-icon> Voltar para Jogos
+          <mat-icon>arrow_back</mat-icon> {{ backToGamesButtonLabel }}
         </button>
       </mat-card-actions>
     </mat-card>
@@ -47,7 +47,7 @@
       </mat-card-content>
       <mat-card-actions class="game-detail-actions">
         <button mat-raised-button color="primary" [routerLink]="['/']">
-          <mat-icon>home</mat-icon> Voltar para Início
+          <mat-icon>home</mat-icon> {{ backToHomeButtonLabel }}
         </button>
       </mat-card-actions>
     </mat-card>

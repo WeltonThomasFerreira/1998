@@ -33,22 +33,28 @@
       </button>
       <span class="app-title" [routerLink]="['/']">1998</span>
       <span class="spacer"></span>
-      <div *ngIf="!isMobile()">
-        <button mat-button [routerLink]="['/']">Início</button>
-        <button mat-button [routerLink]="['/games']">Jogos</button>
-        <button mat-icon-button (click)="toggleTheme()">
-          <mat-icon>{{ isDarkTheme() ? "light_mode" : "dark_mode" }}</mat-icon>
-        </button>
-        <button mat-icon-button [matMenuTriggerFor]="langMenu">
-          <mat-icon>language</mat-icon>
-        </button>
-        <mat-menu #langMenu="matMenu">
-          <button mat-menu-item (click)="changeLanguage('en')">English</button>
-          <button mat-menu-item (click)="changeLanguage('pt')">
-            Português
+      @if (!isMobile()) {
+        <div>
+          <button mat-button [routerLink]="['/']">Início</button>
+          <button mat-button [routerLink]="['/games']">Jogos</button>
+          <button mat-icon-button (click)="toggleTheme()">
+            <mat-icon>{{
+              isDarkTheme() ? "light_mode" : "dark_mode"
+            }}</mat-icon>
           </button>
-        </mat-menu>
-      </div>
+          <button mat-icon-button [matMenuTriggerFor]="langMenu">
+            <mat-icon>language</mat-icon>
+          </button>
+          <mat-menu #langMenu="matMenu">
+            <button mat-menu-item (click)="changeLanguage('en')">
+              English
+            </button>
+            <button mat-menu-item (click)="changeLanguage('pt')">
+              Português
+            </button>
+          </mat-menu>
+        </div>
+      }
     </mat-toolbar>
 
     <main class="router-content">
@@ -57,8 +63,7 @@
 
     <footer class="footer">
       <p>
-        &copy; {{ title() }} {{ "now" | date: "yyyy" }}. Todos os direitos
-        reservados.
+        &copy; {{ title() }} {{ currentYear }}. Todos os direitos reservados.
       </p>
       <p>
         Licenciado sob
