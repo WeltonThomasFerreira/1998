@@ -1,0 +1,73 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    [opened]="sidenavOpened()"
+    (closedStart)="sidenavOpened.set(false)"
+    class="mobile-sidenav"
+  >
+    <mat-nav-list (click)="sidenavOpened.set(false)">
+      <a mat-list-item [routerLink]="['/']">
+        <mat-icon>home</mat-icon> Início
+      </a>
+      <a mat-list-item [routerLink]="['/games']">
+        <mat-icon>apps</mat-icon> Jogos
+      </a>
+      <mat-list-item (click)="toggleTheme()">
+        <mat-icon>{{ isDarkTheme() ? "light_mode" : "dark_mode" }}</mat-icon>
+        {{ isDarkTheme() ? "Tema Claro" : "Tema Escuro" }}
+      </mat-list-item>
+      <mat-list-item (click)="changeLanguage('en')">
+        <mat-icon>language</mat-icon> English
+      </mat-list-item>
+      <mat-list-item (click)="changeLanguage('pt')">
+        <mat-icon>language</mat-icon> Português
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="main-content">
+    <mat-toolbar color="primary" class="mat-elevation-z4">
+      <button mat-icon-button *ngIf="isMobile()" (click)="toggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="app-title" [routerLink]="['/']">1998</span>
+      <span class="spacer"></span>
+      <div *ngIf="!isMobile()">
+        <button mat-button [routerLink]="['/']">Início</button>
+        <button mat-button [routerLink]="['/games']">Jogos</button>
+        <button mat-icon-button (click)="toggleTheme()">
+          <mat-icon>{{ isDarkTheme() ? "light_mode" : "dark_mode" }}</mat-icon>
+        </button>
+        <button mat-icon-button [matMenuTriggerFor]="langMenu">
+          <mat-icon>language</mat-icon>
+        </button>
+        <mat-menu #langMenu="matMenu">
+          <button mat-menu-item (click)="changeLanguage('en')">English</button>
+          <button mat-menu-item (click)="changeLanguage('pt')">
+            Português
+          </button>
+        </mat-menu>
+      </div>
+    </mat-toolbar>
+
+    <main class="router-content">
+      <router-outlet></router-outlet>
+    </main>
+
+    <footer class="footer">
+      <p>
+        &copy; {{ title() }} {{ "now" | date: "yyyy" }}. Todos os direitos
+        reservados.
+      </p>
+      <p>
+        Licenciado sob
+        <a
+          href="https://creativecommons.org/licenses/by-nc/4.0/deed.pt"
+          target="_blank"
+          >CC BY-NC 4.0</a
+        >.
+      </p>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
