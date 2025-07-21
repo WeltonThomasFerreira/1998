@@ -1,16 +1,11 @@
-import { Component, inject } from '@angular/core';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { Injectable, inject } from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { GameListComponent } from '../../components/game-list/game-list.component';
 
-@Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [MatIconModule, GameListComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+@Injectable({
+  providedIn: 'root',
 })
-export class HomeComponent {
+export class IconService {
   private readonly matIconRegistry: MatIconRegistry = inject(MatIconRegistry);
   private readonly domSanitizer: DomSanitizer = inject(DomSanitizer);
 

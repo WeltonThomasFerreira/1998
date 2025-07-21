@@ -1,14 +1,14 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GAMES_DATA, Game } from '../../data/games.data';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MarkdownModule } from 'ngx-markdown';
-import { HttpClient } from '@angular/common/http';
+import { MarkdownModule } from 'ngx-markdown'; // Assuming ngx-markdown is used for rendering
 import { MatChipsModule } from '@angular/material/chips';
-import { marked } from 'marked';
+import { Game } from '../data/games.data';
+import { GameService } from '../services/game.service';
+import { MarkdownService } from '../services/markdown.service';
 
 @Component({
   selector: 'app-game-details',
@@ -27,7 +27,8 @@ import { marked } from 'marked';
 export class GameDetailsComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly http = inject(HttpClient);
+  private readonly gameService: GameService = inject(GameService);
+  private readonly markdownService: MarkdownService = inject(MarkdownService);
 
   public game = signal<Game | undefined>(undefined);
   public rulesMarkdown = signal<string>('');
@@ -36,7 +37,7 @@ export class GameDetailsComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const gameId = params.get('id');
       if (gameId) {
-        const foundGame = GAMES_DATA.find((game) => game.id === gameId);
+        const foundGame = this.gameService.getGameById(gameId);
         if (foundGame) {
           this.game.set(foundGame);
           this.loadMarkdownRules(foundGame.rulesPath);
@@ -48,20 +49,9 @@ export class GameDetailsComponent implements OnInit {
   }
 
   private loadMarkdownRules(path: string): void {
-    this.http.get(path, { responseType: 'text' }).subscribe({
+    this.markdownService.loadMarkdown(path).subscribe({
       next: (data) => {
-        const parsedHtml = marked.parse(data, {
-          gfm: true,
-          breaks: true,
-          async: false,
-        });
-        this.rulesMarkdown.set(parsedHtml);
-      },
-      error: (err) => {
-        console.error('Falha ao carregar markdown:', err);
-        this.rulesMarkdown.set(
-          'Não foi possível carregar as regras deste jogo.',
-        );
+        this.rulesMarkdown.set(data);
       },
     });
   }

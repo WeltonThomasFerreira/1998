@@ -1,4 +1,4 @@
-@use "../../../styles.scss" as s;
+@use "../../../../styles.scss" as s;
 
 :host {
   display: flex;
@@ -10,7 +10,7 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Manter sombra padrão
 }
 
 .toolbar-content {
@@ -26,7 +26,7 @@
   align-items: center;
   gap: s.$spacing-sm;
   text-decoration: none;
-  color: inherit;
+  color: inherit; // Herda a cor do texto do toolbar
 
   span {
     font-size: s.$font-size-lg;

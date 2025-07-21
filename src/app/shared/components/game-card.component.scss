@@ -1,0 +1,63 @@
+@use "../../../styles.scss" as s;
+
+.game-card {
+  cursor: pointer;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+  border-radius: s.$border-radius-md; // Aplicar border-radius do tema
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 s.$spacing-sm s.$spacing-md rgba(0, 0, 0, 0.2); // Usar variável para shadow
+  }
+
+  img {
+    border-radius: s.$border-radius-md s.$border-radius-md 0 0; // Arredonda apenas os cantos superiores
+  }
+
+  mat-card-header {
+    padding: s.$spacing-md; // Ajustar padding
+    mat-card-title {
+      font-size: s.$font-size-xl;
+      color: var(--text-color); // Usar cor de texto principal
+    }
+    mat-card-subtitle {
+      font-size: s.$font-size-sm;
+      color: var(--text-color-secondary); // Usar cor de texto secundário
+    }
+  }
+
+  mat-card-content {
+    padding: s.$spacing-md; // Ajustar padding
+    p {
+      margin-bottom: s.$spacing-md;
+      line-height: 1.5;
+      font-size: s.$font-size-md;
+    }
+    mat-chip-listbox {
+      margin-top: s.$spacing-md;
+      display: flex;
+      flex-wrap: wrap;
+      gap: s.$spacing-sm; // Espaçamento entre os chips
+    }
+  }
+
+  mat-card-actions {
+    padding: s.$spacing-sm s.$spacing-md;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      font-size: s.$font-size-md;
+      border-radius: s.$border-radius-md;
+      background-color: var(--primary-color);
+      color: var(--mat-sys-on-primary);
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: var(--primary-700);
+      }
+    }
+  }
+}

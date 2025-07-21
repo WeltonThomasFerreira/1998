@@ -1,0 +1,93 @@
+@use "../../../styles/styles.scss" as s;
+
+.game-details-container {
+  display: flex;
+  flex-direction: column;
+  padding: s.$spacing-md;
+  max-width: 900px; // Limita a largura para melhor leitura
+  margin: s.$spacing-lg auto; // Centraliza e adiciona margem superior/inferior
+  gap: s.$spacing-lg; // Espaçamento entre o botão e o card
+
+  @media (min-width: s.$breakpoint-mobile) {
+    padding: s.$spacing-xl;
+    margin: s.$spacing-2xl auto;
+    gap: s.$spacing-xl;
+  }
+}
+
+.game-details-card {
+  width: 100%; // Ocupa a largura total do container
+  border-radius: s.$border-radius-lg; // Cantos mais arredondados
+
+  mat-card-header {
+    padding: s.$spacing-md;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; // Alinha título e subtítulo à esquerda
+
+    mat-card-title {
+      font-size: s.$font-size-3xl;
+      margin-bottom: s.$spacing-xs;
+      color: var(--primary-color);
+    }
+
+    mat-card-subtitle {
+      font-size: s.$font-size-md;
+      color: var(--text-color-secondary);
+    }
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; // Garante que a imagem preencha o espaço
+    border-radius: s.$border-radius-lg s.$border-radius-lg 0 0; // Arredonda apenas os cantos superiores
+  }
+
+  mat-card-content {
+    padding: s.$spacing-md;
+
+    p {
+      margin-bottom: s.$spacing-md;
+      line-height: 1.6;
+    }
+
+    mat-chip-listbox {
+      margin-top: s.$spacing-md;
+      display: flex;
+      flex-wrap: wrap;
+      gap: s.$spacing-sm; // Espaçamento entre os chips
+    }
+
+    h2 {
+      font-size: s.$font-size-2xl;
+      margin-top: s.$spacing-xl;
+      margin-bottom: s.$spacing-md;
+      color: var(--primary-color);
+    }
+
+    .markdown-content {
+      // Estilos para o conteúdo markdown já estão em _base.scss
+      // Apenas garantir que o padding não seja duplicado se o componente também tiver
+      padding: 0; // Resetar padding se já estiver sendo aplicado pelo componente
+    }
+  }
+}
+
+button[mat-flat-button] {
+  align-self: flex-start; // Alinha o botão "Voltar" à esquerda
+  padding: s.$spacing-sm s.$spacing-md;
+  font-size: s.$font-size-md;
+  border-radius: s.$border-radius-md;
+  background-color: var(--primary-color);
+  color: var(--mat-sys-on-primary);
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--primary-700);
+  }
+
+  mat-icon {
+    margin-right: s.$spacing-xs;
+  }
+}

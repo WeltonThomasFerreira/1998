@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { Game } from '../../data/games.data';
+import { Game } from '../../features/game/data/games.data';
 
 @Component({
   selector: 'app-game-card',

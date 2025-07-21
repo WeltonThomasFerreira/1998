@@ -8,6 +8,10 @@
   text-align: center;
   justify-content: center;
   align-items: center;
+
+  @media (min-width: s.$breakpoint-mobile) {
+    padding: s.$spacing-xl;
+  }
 }
 
 header {
@@ -25,7 +29,7 @@ header {
   }
 
   mat-icon {
-    font-size: 64px;
+    font-size: 64px; // Tamanho fixo para ícone SVG
     width: 64px;
     height: 64px;
     color: var(--accent-color);
@@ -64,16 +68,4 @@ footer {
   margin-top: s.$spacing-xl;
   color: var(--text-color-secondary);
   font-size: s.$font-size-sm;
-}
-
-@media (min-width: s.$breakpoint-mobile) {
-  .container {
-    padding: s.$spacing-xl;
-  }
-
-  header {
-    h1 {
-      font-size: s.$font-size-4xl;
-    }
-  }
 }

@@ -1,3 +1,6 @@
+// src/styles.scss
+// Ponto de entrada principal para os estilos globais da aplicação.
+
 @use "@angular/material" as mat;
 
 html {
@@ -61,6 +64,7 @@ $breakpoint-tablet: 960px;
   --card-text: var(--mat-sys-on-surface);
   --chip-background: var(--mat-sys-surface-container-high);
   --chip-text: var(--mat-sys-on-surface-variant);
+  --chip-border-color: var(--mat-sys-outline); // Adicionado borda para contraste
 }
 
 .dark-theme {
