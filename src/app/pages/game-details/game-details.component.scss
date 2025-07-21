@@ -1,0 +1,54 @@
+@use "../../../styles.scss" as s;
+
+.game-details-container {
+  padding: s.$spacing-lg;
+  max-width: 900px;
+  margin: s.$spacing-lg auto;
+}
+
+.game-details-card {
+  margin-top: s.$spacing-md;
+
+  mat-card-header {
+    margin-bottom: s.$spacing-md;
+    display: block;
+  }
+
+  mat-card-title {
+    font-size: s.$font-size-3xl;
+    margin-bottom: s.$spacing-xs;
+  }
+
+  mat-card-subtitle {
+    font-size: s.$font-size-md;
+    color: var(--text-color-secondary);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: s.$border-radius-md;
+    margin-bottom: s.$spacing-md;
+  }
+
+  mat-card-content {
+    h2 {
+      margin-top: s.$spacing-xl;
+      margin-bottom: s.$spacing-md;
+      font-size: s.$font-size-2xl;
+      color: var(--primary-color);
+    }
+
+    mat-chip-listbox {
+      margin-bottom: s.$spacing-md;
+    }
+  }
+}
+
+.markdown-content {
+  :host {
+    display: block;
+  }
+}

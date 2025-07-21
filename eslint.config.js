@@ -17,7 +17,7 @@ export default [
       parserOptions: {
         ecmaVersion: 12,
         sourceType: "module",
-        project: "./tsconfig.json",
+        project: ["./tsconfig.app.json", "./tsconfig.spec.json"],
       },
       globals: {
         ...globals.browser,

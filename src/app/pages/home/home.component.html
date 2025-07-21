@@ -1,19 +1,11 @@
 <div class="container">
   <header>
     <h1>Bem-vindo ao 1998</h1>
-    <p>Um projeto de exemplo.</p>
+    <p>Um projeto de exemplo para ensinar jogos de baralho.</p>
     <mat-icon svgIcon="cards-playing"></mat-icon>
   </header>
 
   <main>
-    <p>O tema atual é: {{ isDarkTheme() ? 'Escuro' : 'Claro' }}</p>
-    <p>A visualização para mobile está: {{ isMobile() ? 'Ativada' : 'Desativada' }}</p>
-    <button (click)="isDarkTheme.set(!isDarkTheme())">
-      Trocar Tema
-    </button>
+    <app-game-list></app-game-list>
   </main>
-
-  <footer>
-    <p>&copy; {{ currentYear }} - Todos os direitos reservados.</p>
-  </footer>
 </div>

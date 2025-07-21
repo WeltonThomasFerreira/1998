@@ -5,7 +5,7 @@
       <span>1998 - Jogos de Baralho</span>
     </a>
     <button mat-icon-button (click)="toggleTheme()" aria-label="Toggle theme">
-      <mat-icon>{{ home.isDarkTheme() ? "light_mode" : "dark_mode" }}</mat-icon>
+      <mat-icon>{{ isDarkTheme() ? "light_mode" : "dark_mode" }}</mat-icon>
     </button>
   </div>
 </mat-toolbar>
@@ -15,5 +15,5 @@
 </main>
 
 <footer class="footer">
-  <p>&copy; {{ home.currentYear }} - Todos os direitos reservados.</p>
+  <p>&copy; {{ currentYear }} - Todos os direitos reservados.</p>
 </footer>

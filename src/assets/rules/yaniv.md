@@ -1,8 +1,5 @@
-# Yaniv
-
-- Número de Jogadores: 2 a 5.
-- Baralho: Um baralho padrão de 52 cartas + 2 Coringas (🃏).
-- Objetivo Final: Ser o jogador com menos pontos ao longo de várias rodadas, evitando atingir 100 pontos.
+- **Cartas:** Um baralho padrão de 52 cartas + 2 Coringas (🃏).
+- **Objetivo Final:** Ser o jogador com menos pontos ao longo de várias rodadas, evitando atingir 100 pontos.
 
 ---
 

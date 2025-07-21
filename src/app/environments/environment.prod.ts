@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   BREAKPOINTS: {
     mobile: 992,
     tablet: 1200,
