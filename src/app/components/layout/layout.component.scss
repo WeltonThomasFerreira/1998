@@ -1,0 +1,58 @@
+@use "../../../styles.scss" as s;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 s.$spacing-md;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: s.$spacing-sm;
+  text-decoration: none;
+  color: inherit;
+
+  span {
+    font-size: s.$font-size-lg;
+    font-weight: 500;
+  }
+}
+
+.main-content {
+  flex: 1;
+  padding: s.$spacing-md;
+  background-color: var(--mat-sys-surface-container-lowest);
+}
+
+.footer {
+  padding: s.$spacing-md;
+  text-align: center;
+  background-color: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface-variant);
+  font-size: s.$font-size-sm;
+}
+
+@media (min-width: s.$breakpoint-mobile) {
+  .toolbar-content {
+    padding: 0 s.$spacing-xl;
+  }
+  .main-content {
+    padding: s.$spacing-lg s.$spacing-xl;
+  }
+}
