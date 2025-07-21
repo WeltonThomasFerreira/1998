@@ -4,8 +4,26 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": ["node"]
+    "types": ["node"], // Mantido do seu arquivo atual
+    "baseUrl": "./", // Adicionado para resolver os 'paths'
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@features/*": [
+        "src/app/features/*"
+      ],
+      "@styles/*": [
+        "src/app/styles/*" // Caminho atualizado para a nova localização
+      ]
+    }
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.spec.ts"]
+  "include": ["src/**/*.ts"], // Mantido do seu arquivo atual
+  "exclude": ["src/**/*.spec.ts"] // Mantido do seu arquivo atual
 }

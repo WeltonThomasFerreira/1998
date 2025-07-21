@@ -1,4 +1,4 @@
-// src/styles.scss
+// src/app/styles/styles.scss
 // Ponto de entrada principal para os estilos globais da aplicação.
 
 @use "@angular/material" as mat;
@@ -33,6 +33,7 @@ $spacing-sm: 8px;
 $spacing-md: 16px;
 $spacing-lg: 24px;
 $spacing-xl: 32px;
+$spacing-2xl: 48px;
 
 $font-size-xs: 0.75rem;
 $font-size-sm: 0.875rem;
@@ -59,42 +60,39 @@ $breakpoint-tablet: 960px;
   --primary-800: var(--mat-sys-on-primary-container);
   --accent-color: var(--mat-sys-tertiary);
 
-  // Cores específicas para cards e chips no tema claro
   --card-background: var(--mat-sys-surface-container-low);
   --card-text: var(--mat-sys-on-surface);
   --chip-background: var(--mat-sys-surface-container-high);
   --chip-text: var(--mat-sys-on-surface-variant);
-  --chip-border-color: var(--mat-sys-outline); // Adicionado borda para contraste
+  --chip-border-color: var(--mat-sys-outline);
 }
 
 .dark-theme {
-  --background-color: #1a1a1a; // Fundo mais escuro
-  --text-color: #e0e0e0; // Texto claro
-  --text-color-secondary: #b0b0b0; // Texto secundário mais claro
-  --primary-color: #90caf9; // Azul claro para primário
-  --primary-700: #64b5f6; // Azul um pouco mais escuro
-  --primary-800: #2196f3; // Azul mais forte
-  --accent-color: #ffab40; // Laranja para destaque
+  --background-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --text-color-secondary: #b0b0b0;
+  --primary-color: #90caf9;
+  --primary-700: #64b5f6;
+  --primary-800: #2196f3;
+  --accent-color: #ffab40;
 
-  // Cores do Material Design para o tema escuro (ajustadas para contraste)
-  --mat-sys-surface-container-lowest: #121212; // Fundo mais escuro ainda
-  --mat-sys-surface-container: #212121; // Containers gerais
-  --mat-sys-surface-container-low: #2c2c2c; // Fundo de cards/elementos
-  --mat-sys-surface-container-high: #3a3a3a; // Fundo de chips/elementos mais elevados
-  --mat-sys-on-surface: #e0e0e0; // Texto principal
-  --mat-sys-on-surface-variant: #b0b0b0; // Texto secundário
-  --mat-sys-primary: #90caf9; // Cor primária
-  --mat-sys-primary-container: #1565c0; // Container da cor primária
-  --mat-sys-on-primary-container: #e3f2fd; // Texto no container primário
-  --mat-sys-tertiary: #ffab40; // Cor terciária
-  --mat-sys-on-primary: #121212; // Texto na cor primária (escuro)
+  --mat-sys-surface-container-lowest: #121212;
+  --mat-sys-surface-container: #212121;
+  --mat-sys-surface-container-low: #2c2c2c;
+  --mat-sys-surface-container-high: #3a3a3a;
+  --mat-sys-on-surface: #e0e0e0;
+  --mat-sys-on-surface-variant: #b0b0b0;
+  --mat-sys-primary: #90caf9;
+  --mat-sys-primary-container: #1565c0;
+  --mat-sys-on-primary-container: #e3f2fd;
+  --mat-sys-tertiary: #ffab40;
+  --mat-sys-on-primary: #121212;
 
-  // Cores específicas para cards e chips no tema escuro
   --card-background: var(--mat-sys-surface-container-low);
   --card-text: var(--mat-sys-on-surface);
-  --chip-background: #9e9e9e; // Fundo do chip mais claro (cinza médio)
-  --chip-text: #212121; // Texto do chip mais escuro para contraste
-  --chip-border-color: #bdbdbd; // Borda sutil e mais clara
+  --chip-background: #9e9e9e;
+  --chip-text: #212121;
+  --chip-border-color: #bdbdbd;
 }
 
 body.light-theme {
@@ -107,21 +105,18 @@ body.dark-theme {
   color: var(--text-color);
 }
 
-// Estilos para MatCard
 mat-card {
   background-color: var(--card-background) !important;
   color: var(--card-text) !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important; // Sombra mais proeminente no dark mode
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
 }
 
-// Estilos para MatChip
 mat-chip-listbox mat-chip {
   background-color: var(--chip-background) !important;
   color: var(--chip-text) !important;
-  border: 1px solid var(--chip-border-color) !important; // Adicionado borda para contraste
+  border: 1px solid var(--chip-border-color) !important;
 }
 
-// Estilos para MatToolbar
 mat-toolbar {
   background-color: var(--primary-color) !important;
   color: var(--mat-sys-on-primary) !important;

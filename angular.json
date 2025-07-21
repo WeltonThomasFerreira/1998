@@ -29,11 +29,12 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/app/styles/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "node_modules"
+                "node_modules",
+                "src/app/styles"
               ]
             },
             "server": "src/main.server.ts",
@@ -102,10 +103,11 @@
                 "output": "assets"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/app/styles/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "node_modules"
+                "node_modules",
+                "src/app/styles"
               ]
             }
           }
