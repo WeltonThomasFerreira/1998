@@ -40,6 +40,7 @@
           },
           "configurations": {
             "production": {
+              "outputPath": "dist/1998",
               "budgets": [
                 {
                   "type": "initial",
@@ -98,6 +99,13 @@
               }
             ],
             "styles": ["src/styles.scss"]
+          }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/1998/",
+            "outputPath": "dist/1998/browser"
           }
         }
       }

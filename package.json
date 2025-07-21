@@ -5,10 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng serve",
-    "build": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build",
+    "build": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --base-href=\"/1998/\" --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:1998": "node dist/1998/server/server.mjs",
+    "deploy": "ng deploy",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
     "format": "prettier --write \"./**/*.{js,json,css,scss,ts,html}\""
