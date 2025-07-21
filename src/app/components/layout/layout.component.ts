@@ -1,11 +1,4 @@
-import {
-  Component,
-  inject,
-  signal,
-  effect,
-  HostBinding,
-  PLATFORM_ID,
-} from '@angular/core';
+import { Component, inject, signal, effect, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -31,15 +24,9 @@ export class LayoutComponent {
   public isMobile = signal<boolean>(false);
   public isDarkTheme = signal<boolean>(false);
   public readonly currentYear: number = new Date().getFullYear();
-
   private readonly platformId: object = inject(PLATFORM_ID);
   private readonly matIconRegistry: MatIconRegistry = inject(MatIconRegistry);
   private readonly domSanitizer: DomSanitizer = inject(DomSanitizer);
-
-  @HostBinding('class')
-  public get themeClass(): string {
-    return this.isDarkTheme() ? 'dark-theme' : 'light-theme';
-  }
 
   public constructor() {
     this.registerIcons();

@@ -1,8 +1,3 @@
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use "@angular/material" as mat;
 
 html {
@@ -17,14 +12,7 @@ html {
     )
   );
 
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
+  color-scheme: light; // Padrão para light, será sobrescrito pelo JS
   background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
@@ -67,16 +55,42 @@ $breakpoint-tablet: 960px;
   --primary-700: var(--mat-sys-primary-container);
   --primary-800: var(--mat-sys-on-primary-container);
   --accent-color: var(--mat-sys-tertiary);
+
+  // Cores específicas para cards e chips no tema claro
+  --card-background: var(--mat-sys-surface-container-low);
+  --card-text: var(--mat-sys-on-surface);
+  --chip-background: var(--mat-sys-surface-container-high);
+  --chip-text: var(--mat-sys-on-surface-variant);
 }
 
 .dark-theme {
-  --background-color: var(--mat-sys-surface);
-  --text-color: var(--mat-sys-on-surface);
-  --text-color-secondary: var(--mat-sys-on-surface-variant);
-  --primary-color: var(--mat-sys-primary);
-  --primary-700: var(--mat-sys-primary-container);
-  --primary-800: var(--mat-sys-on-primary-container);
-  --accent-color: var(--mat-sys-tertiary);
+  --background-color: #1a1a1a; // Fundo mais escuro
+  --text-color: #e0e0e0; // Texto claro
+  --text-color-secondary: #b0b0b0; // Texto secundário mais claro
+  --primary-color: #90caf9; // Azul claro para primário
+  --primary-700: #64b5f6; // Azul um pouco mais escuro
+  --primary-800: #2196f3; // Azul mais forte
+  --accent-color: #ffab40; // Laranja para destaque
+
+  // Cores do Material Design para o tema escuro (ajustadas para contraste)
+  --mat-sys-surface-container-lowest: #121212; // Fundo mais escuro ainda
+  --mat-sys-surface-container: #212121; // Containers gerais
+  --mat-sys-surface-container-low: #2c2c2c; // Fundo de cards/elementos
+  --mat-sys-surface-container-high: #3a3a3a; // Fundo de chips/elementos mais elevados
+  --mat-sys-on-surface: #e0e0e0; // Texto principal
+  --mat-sys-on-surface-variant: #b0b0b0; // Texto secundário
+  --mat-sys-primary: #90caf9; // Cor primária
+  --mat-sys-primary-container: #1565c0; // Container da cor primária
+  --mat-sys-on-primary-container: #e3f2fd; // Texto no container primário
+  --mat-sys-tertiary: #ffab40; // Cor terciária
+  --mat-sys-on-primary: #121212; // Texto na cor primária (escuro)
+
+  // Cores específicas para cards e chips no tema escuro
+  --card-background: var(--mat-sys-surface-container-low);
+  --card-text: var(--mat-sys-on-surface);
+  --chip-background: #9e9e9e; // Fundo do chip mais claro (cinza médio)
+  --chip-text: #212121; // Texto do chip mais escuro para contraste
+  --chip-border-color: #bdbdbd; // Borda sutil e mais clara
 }
 
 body.light-theme {
@@ -87,6 +101,26 @@ body.light-theme {
 body.dark-theme {
   background-color: var(--background-color);
   color: var(--text-color);
+}
+
+// Estilos para MatCard
+mat-card {
+  background-color: var(--card-background) !important;
+  color: var(--card-text) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important; // Sombra mais proeminente no dark mode
+}
+
+// Estilos para MatChip
+mat-chip-listbox mat-chip {
+  background-color: var(--chip-background) !important;
+  color: var(--chip-text) !important;
+  border: 1px solid var(--chip-border-color) !important; // Adicionado borda para contraste
+}
+
+// Estilos para MatToolbar
+mat-toolbar {
+  background-color: var(--primary-color) !important;
+  color: var(--mat-sys-on-primary) !important;
 }
 
 .markdown-content {
