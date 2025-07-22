@@ -71,6 +71,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Garante que o conteúdo principal ocupe toda a altura */
+  padding-top: 64px; /* Adiciona padding para compensar o cabeçalho fixo (altura da mat-toolbar) */
 }
 
 /* Estilos para a toolbar (cabeçalho) */
@@ -81,11 +82,13 @@
   background-color: var(--primary-color); // Fundo do cabeçalho definido em styles.scss
   color: var(--primary-text-color); // Cor do texto do cabeçalho definido em styles.scss
   box-shadow: $shadow-md; // Usando variável SCSS
-  position: sticky; /* Fixa o cabeçalho no topo */
+  position: fixed; /* Agora o cabeçalho é fixo na viewport */
   top: 0;
+  left: 0; /* Garante que comece no canto esquerdo */
+  width: 100%; /* Ocupa a largura total da viewport */
   z-index: 1000; /* Garante que esteja acima de outros elementos */
-  border-bottom-left-radius: $border-radius-lg; /* Usando variável SCSS */
-  border-bottom-right-radius: $border-radius-lg; /* Usando variável SCSS */
+  // REMOVIDO: border-bottom-left-radius: $border-radius-lg;
+  // REMOVIDO: border-bottom-right-radius: $border-radius-lg;
   padding: 0 $spacing-md; /* Usando variável SCSS */
 
   @media (max-width: $breakpoint-mobile) { /* Usando variável SCSS */
