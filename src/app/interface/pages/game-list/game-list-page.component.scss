@@ -39,7 +39,9 @@
     }
 
     .mat-form-field-flex {
-      background-color: var(--background-color); // Fundo sólido para o input/select
+      background-color: var(
+        --background-color
+      ); // Fundo sólido para o input/select
       border-radius: $border-radius-sm;
       border: 1px solid var(--border-color); // Borda para o campo
       padding: $spacing-sm $spacing-md; // Padding interno
@@ -67,7 +69,8 @@
       display: none; // Remove a linha inferior
     }
 
-    .mat-input-element, .mat-select-value {
+    .mat-input-element,
+    .mat-select-value {
       color: var(--text-color); // Cor do texto digitado/selecionado
       font-size: $font-size-md;
     }
@@ -99,7 +102,10 @@
 
 .games-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); // Colunas responsivas
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(280px, 1fr)
+  ); // Colunas responsivas
   gap: $spacing-lg; // Espaçamento entre os cards
   padding: $spacing-md 0; // Padding vertical
 }
@@ -108,7 +114,9 @@
   border-radius: $border-radius-lg;
   overflow: hidden;
   box-shadow: $shadow-md; // Usando a variável SCSS
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -178,12 +186,19 @@
       font-size: $font-size-md; /* Tamanho do texto do botão */
       border-radius: $border-radius-sm;
       box-shadow: $shadow-md;
-      transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-      background-color: var(--primary-color); /* Cor do botão azul como na imagem */
+      transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+      background-color: var(
+        --primary-color
+      ); /* Cor do botão azul como na imagem */
       color: var(--primary-text-color); /* Cor do texto do botão */
 
       &:hover {
-        background-color: var(--button-hover-background-color); /* Usa a nova variável CSS */
+        background-color: var(
+          --button-hover-background-color
+        ); /* Usa a nova variável CSS */
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         transform: translateY(-2px);
       }
@@ -218,13 +233,19 @@
     font-size: $font-size-lg;
     border-radius: $border-radius-md;
     box-shadow: $shadow-md; // Usando a variável SCSS
-    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-    background-color: var(--primary-color); /* Cor do botão azul como na imagem */
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+    background-color: var(
+      --primary-color
+    ); /* Cor do botão azul como na imagem */
     color: var(--primary-text-color); /* Cor do texto do botão */
 
-
     &:hover {
-      background-color: var(--button-hover-background-color); /* Usa a nova variável CSS */
+      background-color: var(
+        --button-hover-background-color
+      ); /* Usa a nova variável CSS */
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
       transform: translateY(-2px);
     }

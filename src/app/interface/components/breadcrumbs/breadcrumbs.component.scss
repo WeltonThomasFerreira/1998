@@ -35,15 +35,21 @@
 }
 
 .breadcrumb-link {
-  color: var(--primary-color); // Cor primária para links ativos (melhor contraste)
+  color: var(
+    --primary-color
+  ); // Cor primária para links ativos (melhor contraste)
   text-decoration: none;
   padding: $spacing-xs $spacing-sm;
   border-radius: $border-radius-sm;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 
   &:hover {
     background-color: var(--hover-background-color);
-    color: var(--primary-color); // Mantém a cor primária no hover para consistência
+    color: var(
+      --primary-color
+    ); // Mantém a cor primária no hover para consistência
   }
 
   &:focus-visible {

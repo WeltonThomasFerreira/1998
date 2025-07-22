@@ -46,7 +46,9 @@
   height: 48px;
   min-width: 48px;
   box-shadow: none; /* Remove sombra */
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
   z-index: 10;
 
   &:hover {
@@ -85,7 +87,9 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição para o card */
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Transição para o card */
   cursor: pointer; /* Indica que o card é clicável */
   scroll-snap-align: center; /* Para o "snap" de rolagem */
 
@@ -155,14 +159,21 @@
     font-size: $font-size-md; /* Tamanho do texto do botão */
     border-radius: $border-radius-sm;
     box-shadow: $shadow-md;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
     width: fit-content; /* Ajusta a largura do botão ao conteúdo */
     margin-top: $spacing-md; /* Adiciona margem acima do botão */
-    background-color: var(--primary-color); /* Cor do botão azul como na imagem */
+    background-color: var(
+      --primary-color
+    ); /* Cor do botão azul como na imagem */
     color: var(--primary-text-color); /* Cor do texto do botão */
 
     &:hover {
-      background-color: var(--button-hover-background-color); /* Usa a nova variável CSS */
+      background-color: var(
+        --button-hover-background-color
+      ); /* Usa a nova variável CSS */
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
       transform: translateY(-2px);
     }

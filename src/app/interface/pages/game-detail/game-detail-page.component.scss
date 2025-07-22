@@ -31,7 +31,9 @@
 
 .game-players-type {
   font-size: $font-size-lg;
-  color: var(--text-color); // Alterado para text-color para unificar a cor do texto
+  color: var(
+    --text-color
+  ); // Alterado para text-color para unificar a cor do texto
   margin-bottom: $spacing-lg;
 
   @media (max-width: $breakpoint-mobile) {
@@ -81,7 +83,9 @@ mat-divider {
   border-radius: 0;
   box-shadow: none;
   line-height: 1.7;
-  color: var(--text-color); // Garante que o texto do markdown use a cor principal
+  color: var(
+    --text-color
+  ); // Garante que o texto do markdown use a cor principal
   max-width: 800px; /* Limita a largura do conteúdo markdown para melhor legibilidade */
   margin-left: auto;
   margin-right: auto;
@@ -100,13 +104,24 @@ mat-divider {
   margin: $spacing-xl auto 0; // Centraliza e adiciona margem superior
 
   button {
+    // Estilos para o botão "Rolar para o Topo"
     padding: $spacing-md $spacing-xl;
     font-size: $font-size-lg;
     border-radius: $border-radius-md;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    box-shadow: $shadow-md; // Usando a variável SCSS
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+    background-color: var(
+      --primary-color
+    ); /* Cor do botão azul como na imagem */
+    color: var(--primary-text-color); /* Cor do texto do botão */
 
     &:hover {
+      background-color: var(
+        --button-hover-background-color
+      ); /* Usa a nova variável CSS */
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
       transform: translateY(-2px);
     }
@@ -118,7 +133,6 @@ mat-divider {
     }
   }
 }
-
 
 .game-not-found-card {
   border-radius: $border-radius-lg;

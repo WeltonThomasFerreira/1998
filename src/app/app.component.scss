@@ -14,13 +14,17 @@
   height: 100%;
   background-color: var(--background-color); // Variável definida em styles.scss
   color: var(--text-color); // Variável definida em styles.scss
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Estilos para o sidenav (menu lateral) */
 .sidenav {
   width: 250px;
-  background-color: var(--card-background-color); // Variável definida em styles.scss
+  background-color: var(
+    --card-background-color
+  ); // Variável definida em styles.scss
   color: var(--text-color); // Variável definida em styles.scss
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -59,7 +63,6 @@
     margin-left: auto; /* Empurra o toggle para a direita */
   }
 }
-
 
 /* Estilos para o conteúdo principal */
 .main-content {
@@ -100,7 +103,9 @@
   display: inline-flex; /* Para que o ícone e o texto fiquem na mesma linha e centralizados */
   align-items: center;
   text-decoration: none;
-  color: var(--primary-text-color); /* A cor do texto do título deve ser a cor do texto primário */
+  color: var(
+    --primary-text-color
+  ); /* A cor do texto do título deve ser a cor do texto primário */
   font-size: 24px;
   font-weight: bold;
   transition: color 0.3s ease;

@@ -17,7 +17,7 @@ import {
   BreadcrumbsComponent,
   BreadcrumbItem,
 } from '@interface/components/breadcrumbs/breadcrumbs.component';
-import { BackToTopButtonComponent } from '@interface/components/back-to-top-button/back-to-top-button.component';
+import { BackToTopButtonComponent } from '@interface/components/back-to-top-button/back-to-top-button.component'; // Importação corrigida
 import { TranslationContent } from '@shared/constants/app.constants';
 
 @Component({
@@ -106,6 +106,16 @@ export class GameDetailPageComponent implements OnInit, OnDestroy {
 
   backToList(): void {
     this.router.navigate(['/games']);
+  }
+
+  /**
+   * Rola a página suavemente para o topo.
+   */
+  scrollToTop(): void {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 
   get breadcrumbs(): BreadcrumbItem[] {

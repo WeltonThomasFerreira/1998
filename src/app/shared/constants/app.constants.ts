@@ -45,6 +45,7 @@ export interface TranslationContent {
   homeBreadcrumb: string;
   gamesBreadcrumb: string;
   aboutBreadcrumb: string;
+  scrollToTop: string; // Nova chave de tradução
   // Categorias de jogos (para exibição no filtro)
   NUMBER_OF_DECKS: string;
   NUMBER_OF_PLAYERS: string;
@@ -132,6 +133,7 @@ export const TRANSLATIONS: Translations = {
     homeBreadcrumb: 'Início',
     gamesBreadcrumb: 'Jogos',
     aboutBreadcrumb: 'Sobre',
+    scrollToTop: 'Rolar para o Topo', // Nova tradução
     // Categorias de jogos (para exibição no filtro)
     NUMBER_OF_DECKS: 'Número de Baralhos',
     NUMBER_OF_PLAYERS: 'Número de Jogadores',
@@ -201,6 +203,7 @@ export const TRANSLATIONS: Translations = {
     homeBreadcrumb: 'Home',
     gamesBreadcrumb: 'Games',
     aboutBreadcrumb: 'About',
+    scrollToTop: 'Scroll to Top', // Nova tradução
     // Game categories (for filter display)
     NUMBER_OF_DECKS: 'Number of Decks',
     NUMBER_OF_PLAYERS: 'Number of Players',

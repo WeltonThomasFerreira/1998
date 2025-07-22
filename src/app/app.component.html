@@ -4,17 +4,32 @@
   <!-- Sidenav de navegação -->
   <mat-sidenav #sidenav mode="over" class="sidenav">
     <mat-nav-list (click)="closeSidenav()">
-      <a mat-list-item routerLink="/home" routerLinkActive="active-link" [attr.aria-label]="translations()['home']">
+      <a
+        mat-list-item
+        routerLink="/home"
+        routerLinkActive="active-link"
+        [attr.aria-label]="translations()['home']"
+      >
         <mat-icon matListItemIcon>home</mat-icon>
-        <span matListItemTitle>{{ translations()['home'] }}</span>
+        <span matListItemTitle>{{ translations()["home"] }}</span>
       </a>
-      <a mat-list-item routerLink="/games" routerLinkActive="active-link" [attr.aria-label]="translations()['games']">
+      <a
+        mat-list-item
+        routerLink="/games"
+        routerLinkActive="active-link"
+        [attr.aria-label]="translations()['games']"
+      >
         <mat-icon matListItemIcon>casino</mat-icon>
-        <span matListItemTitle>{{ translations()['games'] }}</span>
+        <span matListItemTitle>{{ translations()["games"] }}</span>
       </a>
-      <a mat-list-item routerLink="/about" routerLinkActive="active-link" [attr.aria-label]="translations()['about']">
+      <a
+        mat-list-item
+        routerLink="/about"
+        routerLinkActive="active-link"
+        [attr.aria-label]="translations()['about']"
+      >
         <mat-icon matListItemIcon>info</mat-icon>
-        <span matListItemTitle>{{ translations()['about'] }}</span>
+        <span matListItemTitle>{{ translations()["about"] }}</span>
       </a>
     </mat-nav-list>
 
@@ -50,24 +65,51 @@
   <mat-sidenav-content class="main-content">
     <mat-toolbar color="primary" class="app-toolbar">
       <!-- Botão do menu hambúrguer (canto esquerdo) -->
-      <button mat-icon-button (click)="sidenav.toggle()" [attr.aria-label]="sidenav.opened ? translations()['closeMenu'] : translations()['openMenu']">
+      <button
+        mat-icon-button
+        (click)="sidenav.toggle()"
+        [attr.aria-label]="
+          sidenav.opened
+            ? translations()['closeMenu']
+            : translations()['openMenu']
+        "
+      >
         <mat-icon class="toolbar-icon">menu</mat-icon>
       </button>
 
       <!-- Título do aplicativo (centralizado) -->
       <div class="app-title-wrapper">
-        <a routerLink="/home" class="app-title-link" [attr.aria-label]="translations()['appName']">
-          <span class="app-name">{{ translations()['appName'] }}</span> <!-- Usa a tradução para o nome do app -->
+        <a
+          routerLink="/home"
+          class="app-title-link"
+          [attr.aria-label]="translations()['appName']"
+        >
+          <span class="app-name">{{ translations()["appName"] }}</span>
+          <!-- Usa a tradução para o nome do app -->
         </a>
       </div>
 
       <!-- Botões de tema e idioma (canto direito) -->
       <div class="toolbar-right-buttons">
-        <button mat-icon-button (click)="toggleTheme()" class="hide-on-mobile" [attr.aria-label]="translations()['toggleTheme']">
-          <mat-icon class="toolbar-icon">{{ isDarkTheme() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        <button
+          mat-icon-button
+          (click)="toggleTheme()"
+          class="hide-on-mobile"
+          [attr.aria-label]="translations()['toggleTheme']"
+        >
+          <mat-icon class="toolbar-icon">{{
+            isDarkTheme() ? "light_mode" : "dark_mode"
+          }}</mat-icon>
         </button>
-        <button mat-button (click)="toggleLanguage()" class="language-button hide-on-mobile" [attr.aria-label]="translations()['toggleLanguage']">
-          <span class="language-text">{{ currentLanguage() === 'pt' ? 'PT' : 'EN' }}</span>
+        <button
+          mat-button
+          (click)="toggleLanguage()"
+          class="language-button hide-on-mobile"
+          [attr.aria-label]="translations()['toggleLanguage']"
+        >
+          <span class="language-text">{{
+            currentLanguage() === "pt" ? "PT" : "EN"
+          }}</span>
         </button>
       </div>
     </mat-toolbar>
@@ -78,7 +120,7 @@
 
     <!-- Rodapé -->
     <footer class="app-footer">
-      <p>{{ translations()['footerText'] }}</p>
+      <p>{{ translations()["footerText"] }}</p>
       <p>Este é um placeholder para mais informações.</p>
     </footer>
   </mat-sidenav-content>

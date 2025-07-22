@@ -28,12 +28,19 @@
     font-size: $font-size-md; /* Tamanho do texto do botão, igual ao botão de detalhes */
     border-radius: $border-radius-sm;
     box-shadow: $shadow-md;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-    background-color: var(--primary-color); /* Cor do botão azul como na imagem */
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+    background-color: var(
+      --primary-color
+    ); /* Cor do botão azul como na imagem */
     color: var(--primary-text-color); /* Cor do texto do botão */
 
     &:hover {
-      background-color: var(--button-hover-background-color); /* Usa a nova variável CSS */
+      background-color: var(
+        --button-hover-background-color
+      ); /* Usa a nova variável CSS */
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
       transform: translateY(-2px);
     }
