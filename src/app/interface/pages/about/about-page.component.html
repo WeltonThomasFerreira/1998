@@ -1,7 +1,7 @@
 <!-- src/app/interface/pages/about/about-page.component.html -->
 
 <div class="about-page-container container">
-  <app-breadcrumbs [path]="breadcrumbs()"></app-breadcrumbs>
+  <app-breadcrumbs [path]="breadcrumbs"></app-breadcrumbs>
 
   <h1 class="page-title">{{ translations()["aboutProject"] }}</h1>
 
@@ -24,7 +24,7 @@
       <button
         mat-raised-button
         color="primary"
-        routerLink="/home"
+        (click)="backToHome()"
         [attr.aria-label]="translations()['backToHome']"
       >
         {{ translations()["backToHome"] }}

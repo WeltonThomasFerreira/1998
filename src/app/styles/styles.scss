@@ -15,11 +15,15 @@ html {
   @include mat.theme(
     (
       color: (
-        primary: mat.$azure-palette, // Paleta primária Azure
-        tertiary: mat.$blue-palette, // Paleta terciária Azul
+        primary: mat.$azure-palette,
+        // Paleta primária Azure
+        tertiary: mat.$blue-palette,
+        // Paleta terciária Azul
       ),
-      typography: Roboto, // Usando a tipografia padrão Roboto
-      density: 0, // Densidade padrão
+      typography: Roboto,
+      // Usando a tipografia padrão Roboto
+      density: 0,
+      // Densidade padrão
     )
   );
 
@@ -66,9 +70,12 @@ $breakpoint-mobile: 600px;
 $breakpoint-tablet: 960px;
 
 // Variáveis SCSS para sombras (DEFINIDAS AQUI)
-$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-
+$shadow-md:
+  0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-xl:
+  0 20px 25px -5px rgba(0, 0, 0, 0.1),
+  0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
 /* Estilos para o tema claro (aplicados quando a classe 'light-theme' está no <html>) */
 /* Estas variáveis CSS customizadas complementam o tema Material 3 */
@@ -94,10 +101,13 @@ html.dark-theme {
   @include mat.theme(
     (
       color: (
-        primary: mat.$azure-palette, // Paleta primária Azure para o tema escuro
-        tertiary: mat.$blue-palette, // Paleta terciária Azul para o tema escuro
+        primary: mat.$azure-palette,
+        // Paleta primária Azure para o tema escuro
+        tertiary: mat.$blue-palette,
+        // Paleta terciária Azul para o tema escuro
       ),
-      typography: Roboto, // Usando a tipografia padrão Roboto
+      typography: Roboto,
+      // Usando a tipografia padrão Roboto
       density: 0,
     )
   );

@@ -1,80 +1,99 @@
 // src/app/application/services/game/game.service.ts
 
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { toObservable } from '@angular/core/rxjs-interop'; // Importar toObservable para sinais
 
 import { Game } from '@domain/models/game.model';
-import { MOCK_GAMES } from '@infrastructure/data/mock-games';
+import { GAMES_DATA } from '@domain/data/games.data';
+import { LanguageService } from '@application/services/language/language.service';
+import { TranslationContent } from '@shared/constants/app.constants';
 
 /**
- * Serviço de aplicação para gerenciar a lógica de negócio relacionada a jogos.
- * Ele interage com a camada de infraestrutura (MOCK_GAMES neste caso)
- * e fornece dados formatados para a camada de interface.
- *
- * Em um projeto real, este serviço poderia interagir com um GameRepository
- * que, por sua vez, se comunicaria com uma API.
+ * Serviço de aplicação para gerenciar os dados dos jogos.
+ * Ele fornece métodos para obter jogos em destaque, todos os jogos e um jogo por ID,
+ * garantindo que os nomes e descrições sejam traduzidos dinamicamente.
  */
 @Injectable({
   providedIn: 'root',
 })
 export class GameService {
-  constructor() {}
+  // Converte o sinal de traduções em um Observable para reatividade
+  private translations$: Observable<TranslationContent>;
 
-  /**
-   * Retorna uma lista de jogos em destaque.
-   * @returns Observable de um array de Game.
-   */
-  getFeaturedGames(): Observable<Game[]> {
-    const featured = MOCK_GAMES.filter((game: Game) => game.featured);
-    return of(featured).pipe(delay(300));
+  constructor(private languageService: LanguageService) {
+    // Converte o sinal de traduções do LanguageService em um Observable.
+    // Isso permite que o GameService reaja às mudanças de idioma.
+    this.translations$ = toObservable(this.languageService.translations);
   }
 
   /**
-   * Retorna todos os jogos disponíveis.
-   * @returns Observable de um array de Game.
+   * Retorna todos os jogos, com os nomes e descrições traduzidos para o idioma atual.
+   * Este Observable emitirá novos valores sempre que o idioma mudar.
+   * @returns Um Observable de um array de objetos Game.
    */
   getAllGames(): Observable<Game[]> {
-    return of(MOCK_GAMES).pipe(delay(300));
+    return this.translations$.pipe(
+      map((currentTranslations) => {
+        // Mapeia os dados brutos dos jogos para incluir nomes e descrições traduzidos
+        return GAMES_DATA.map((game) =>
+          this.mapGameWithTranslations(game, currentTranslations),
+        );
+      }),
+    );
   }
 
   /**
-   * Retorna um jogo específico pelo seu ID.
-   * @param id O ID do jogo a ser buscado.
-   * @returns Observable do objeto Game, ou undefined se não encontrado.
+   * Retorna os jogos em destaque, com os nomes e descrições traduzidos para o idioma atual.
+   * Este Observable emitirá novos valores sempre que o idioma mudar.
+   * @returns Um Observable de um array de objetos Game.
+   */
+  getFeaturedGames(): Observable<Game[]> {
+    return this.translations$.pipe(
+      map((currentTranslations) => {
+        const featured = GAMES_DATA.filter((game) => game.featured);
+        return featured.map((game) =>
+          this.mapGameWithTranslations(game, currentTranslations),
+        );
+      }),
+    );
+  }
+
+  /**
+   * Retorna um jogo específico por ID, com o nome e a descrição traduzidos.
+   * Este Observable emitirá um novo valor sempre que o idioma mudar.
+   * @param id O ID do jogo.
+   * @returns Um Observable do objeto Game, ou undefined se não encontrado.
    */
   getGameById(id: string): Observable<Game | undefined> {
-    const game = MOCK_GAMES.find((g: Game) => g.id === id);
-    return of(game).pipe(delay(300));
+    return this.translations$.pipe(
+      map((currentTranslations) => {
+        const game = GAMES_DATA.find((g) => g.id === id);
+        if (game) {
+          return this.mapGameWithTranslations(game, currentTranslations);
+        }
+        return undefined;
+      }),
+    );
   }
 
   /**
-   * Retorna uma lista de jogos filtrada por termo de busca e categorias.
-   * @param searchTerm Termo para buscar no nome do jogo.
-   * @param categoryType Tipo da categoria para filtrar (ex: 'Número de Baralhos').
-   * @param categoryValue Valor da categoria para filtrar (ex: '1', '2-4').
-   * @returns Observable de um array de Game.
+   * Mapeia um objeto Game para incluir as propriedades 'name' e 'description'
+   * com base nas chaves de tradução e no objeto de traduções atual.
+   * @param game O objeto Game original.
+   * @param translations O objeto de traduções para o idioma atual.
+   * @returns O objeto Game com nome e descrição traduzidos.
    */
-  filterGames(
-    searchTerm: string,
-    categoryType: string,
-    categoryValue: string,
-  ): Observable<Game[]> {
-    let filtered = MOCK_GAMES;
-
-    if (searchTerm) {
-      filtered = filtered.filter((game: Game) =>
-        game.name.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-    }
-
-    if (categoryType && categoryValue) {
-      filtered = filtered.filter(
-        (game: Game) =>
-          game.categories && game.categories[categoryType] === categoryValue,
-      );
-    }
-
-    return of(filtered).pipe(delay(300));
+  private mapGameWithTranslations(
+    game: Game,
+    translations: TranslationContent,
+  ): Game {
+    return {
+      ...game,
+      // Acessa as traduções usando as chaves dinamicamente
+      name: translations[game.nameKey] || game.nameKey, // Fallback para a chave se a tradução não for encontrada
+      description: translations[game.descriptionKey] || game.descriptionKey, // Fallback para a chave
+    };
   }
 }

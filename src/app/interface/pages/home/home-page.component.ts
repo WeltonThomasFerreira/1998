@@ -11,6 +11,7 @@ import { GameService } from '@application/services/game/game.service';
 import { LanguageService } from '@application/services/language/language.service';
 import { GameCarouselComponent } from '@interface/components/game-carousel/game-carousel.component';
 import { LoadingSpinnerComponent } from '@interface/components/loading-spinner/loading-spinner.component';
+import { TranslationContent } from '@shared/constants/app.constants'; // Import TranslationContent
 
 @Component({
   selector: 'app-home-page',
@@ -26,10 +27,14 @@ import { LoadingSpinnerComponent } from '@interface/components/loading-spinner/l
   ],
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-  featuredGames = signal<Game[] | null>(null);
+  featuredGames = signal<Game[] | null>(null); // Pode ser nulo enquanto carrega
   isLoading = signal(true);
 
-  translations = computed(() => this.languageService.translations);
+  // Sinal computado para acessar as traduções reativamente do LanguageService
+  // Agora tipado corretamente para TranslationContent
+  translations = computed<TranslationContent>(() =>
+    this.languageService.translations(),
+  );
 
   private gameSubscription!: Subscription;
   private languageSubscription!: Subscription;
@@ -43,6 +48,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadFeaturedGames();
 
+    // Inscreve-se para mudanças de idioma para recarregar os jogos
+    // O sinal `translations` já reagirá automaticamente, mas recarregar os jogos
+    // garante que os dados do GameService sejam re-buscados com as novas traduções.
     this.languageSubscription = this.languageService.currentLanguage$.subscribe(
       () => {
         this.loadFeaturedGames();
@@ -59,7 +67,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
     }
   }
 
-  private loadFeaturedGames(): void {
+  /**
+   * Carrega os jogos em destaque do serviço.
+   */
+  loadFeaturedGames(): void {
     this.isLoading.set(true);
     this.gameSubscription = this.gameService.getFeaturedGames().subscribe({
       next: (games: Game[]) => {
@@ -68,16 +79,23 @@ export class HomePageComponent implements OnInit, OnDestroy {
       },
       error: (err: any) => {
         console.error('Erro ao carregar jogos em destaque:', err);
-        this.featuredGames.set([]);
+        this.featuredGames.set([]); // Define como array vazio em caso de erro
         this.isLoading.set(false);
       },
     });
   }
 
+  /**
+   * Navega para a página de detalhes de um jogo específico.
+   * @param gameId O ID do jogo a ser visualizado.
+   */
   navigateToGameDetail(gameId: string): void {
     this.router.navigate(['/games', gameId]);
   }
 
+  /**
+   * Navega para a página de todos os jogos.
+   */
   navigateToAllGames(): void {
     this.router.navigate(['/games']);
   }

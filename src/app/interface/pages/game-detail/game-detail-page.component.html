@@ -1,7 +1,8 @@
 <!-- src/app/interface/pages/game-detail/game-detail-page.component.html -->
 
 <div class="game-detail-page-container container">
-  <app-breadcrumbs [path]="breadcrumbs()"></app-breadcrumbs>
+  <!-- Correção: Remover () de breadcrumbs -->
+  <app-breadcrumbs [path]="breadcrumbs"></app-breadcrumbs>
 
   @if (isLoading()) {
     <app-loading-spinner></app-loading-spinner>
@@ -12,7 +13,12 @@
           {{ translations()["gameNotFound"] }}
         </h2>
         <p>{{ translations()["gameNotFound"] }}</p>
-        <button mat-raised-button color="warn" (click)="backToList()">
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="backToList()"
+          [attr.aria-label]="translations()['backToList']"
+        >
           {{ translations()["backToList"] }}
         </button>
       </mat-card-content>
@@ -20,12 +26,16 @@
   } @else {
     <mat-card class="game-details-card">
       <mat-card-header>
+        <!-- game.name e game.description já vêm traduzidos do GameService -->
         <mat-card-title class="game-title">{{ game()!.name }}</mat-card-title>
+        <!-- game.players e game.type podem precisar de tradução se forem chaves -->
         <mat-card-subtitle class="game-players-type">
-          {{ game()!.players }} | {{ game()!.type }}
+          {{ translations()[game()!.players] || game()!.players }} |
+          {{ translations()[game()!.type] || game()!.type }}
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
+        <!-- game.description já vem traduzido do GameService -->
         <p class="game-description">{{ game()!.description }}</p>
 
         <mat-divider></mat-divider>
@@ -41,9 +51,9 @@
           mat-raised-button
           color="primary"
           (click)="backToList()"
-          [attr.aria-label]="translations()['backToList']"
+          [attr.aria-label]="translations()['backToHome']"
         >
-          {{ translations()["backToList"] }}
+          {{ translations()["backToHome"] }}
         </button>
       </mat-card-actions>
     </mat-card>

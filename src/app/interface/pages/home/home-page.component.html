@@ -1,12 +1,14 @@
 <!-- src/app/interface/pages/home/home-page.component.html -->
 
 <div class="home-page-container container">
-  <h1 class="page-title">{{ translations()["featuredGames"] }}</h1>
+  <!-- Acessando o valor do signal translations e depois a propriedade -->
+  <h1 class="page-title">{{ translations().featuredGames }}</h1>
 
   @if (isLoading()) {
     <app-loading-spinner></app-loading-spinner>
   } @else if (featuredGames() === null || featuredGames()!.length === 0) {
-    <p class="no-games-message">{{ translations()["noFeaturedGames"] }}</p>
+    <!-- Acessando o valor do signal translations e depois a propriedade -->
+    <p class="no-games-message">{{ translations().noFeaturedGames }}</p>
   } @else {
     <app-game-carousel
       [games]="featuredGames()"
@@ -15,13 +17,14 @@
     ></app-game-carousel>
 
     <div class="all-games-button-container">
+      <!-- Acessando o valor do signal translations e depois a propriedade -->
       <button
         mat-raised-button
         color="accent"
         (click)="navigateToAllGames()"
-        [attr.aria-label]="translations()['showAllGames']"
+        [attr.aria-label]="translations().showAllGames"
       >
-        {{ translations()["showAllGames"] }}
+        {{ translations().showAllGames }}
       </button>
     </div>
   }

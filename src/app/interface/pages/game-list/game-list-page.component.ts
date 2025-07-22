@@ -10,7 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Import MatProgressSpinnerModule
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Subscription } from 'rxjs';
 
 import { Game, GAME_CATEGORIES } from '@domain/models/game.model';
@@ -22,6 +22,7 @@ import {
   BreadcrumbItem,
 } from '@interface/components/breadcrumbs/breadcrumbs.component';
 import { FilterCategoryTypesPipe } from '@shared/pipes/filter-category-types/filter-category-types-pipe';
+import { TranslationContent } from '@shared/constants/app.constants'; // Importar TranslationContent
 
 @Component({
   selector: 'app-game-list-page',
@@ -38,7 +39,7 @@ import { FilterCategoryTypesPipe } from '@shared/pipes/filter-category-types/fil
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MatProgressSpinnerModule, // Added here
+    MatProgressSpinnerModule,
     LoadingSpinnerComponent,
     BreadcrumbsComponent,
     FilterCategoryTypesPipe,
@@ -56,12 +57,16 @@ export class GameListPageComponent implements OnInit, OnDestroy {
   selectedCategoryValue = signal('');
   displayCount = signal(5);
 
-  translations = computed(() => this.languageService.translations);
+  // Sinal computado para acessar as traduções reativamente
+  translations = computed<TranslationContent>(() =>
+    this.languageService.translations(),
+  );
+
   availableCategoryTypes = computed(() => Object.values(GAME_CATEGORIES));
   availableCategoryValues = computed(() => {
     const type = this.selectedCategoryType();
     if (!type) return [];
-    // Acesso corrigido para game.categories[type]
+    // Mapeia os jogos filtrados para obter os valores únicos da categoria selecionada
     return [
       ...new Set(
         this.allGames().map((game: Game) =>
@@ -86,9 +91,10 @@ export class GameListPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadAllGames();
 
+    // Inscreve-se para mudanças de idioma para recarregar os jogos e aplicar filtros
     this.languageSubscription = this.languageService.currentLanguage$.subscribe(
       () => {
-        this.loadAllGames();
+        this.loadAllGames(); // Recarrega os jogos com as novas traduções
       },
     );
   }
@@ -104,6 +110,7 @@ export class GameListPageComponent implements OnInit, OnDestroy {
 
   private loadAllGames(): void {
     this.isLoading.set(true);
+    // O GameService agora retorna jogos já traduzidos, então não precisamos de map aqui
     this.gameSubscription = this.gameService.getAllGames().subscribe({
       next: (games: Game[]) => {
         this.allGames.set(games);
@@ -126,8 +133,8 @@ export class GameListPageComponent implements OnInit, OnDestroy {
     const value = this.selectedCategoryValue();
 
     const filtered = this.allGames().filter((game: Game) => {
-      const matchesSearch = game.name.toLowerCase().includes(term);
-      // Acesso corrigido para game.categories[type]
+      // A busca agora usa a propriedade 'name' do jogo, que já está traduzida
+      const matchesSearch = game.name?.toLowerCase().includes(term);
       const matchesCategory =
         !type || !value || (game.categories && game.categories[type] === value);
       return matchesSearch && matchesCategory;
@@ -158,6 +165,7 @@ export class GameListPageComponent implements OnInit, OnDestroy {
   }
 
   get breadcrumbs(): BreadcrumbItem[] {
+    // Usando as traduções do sinal computado
     return [
       { name: this.translations()['homeBreadcrumb'], path: '/home' },
       { name: this.translations()['gamesBreadcrumb'], path: null },
