@@ -11,7 +11,7 @@ import { GameService } from '@application/services/game/game.service';
 import { LanguageService } from '@application/services/language/language.service';
 import { GameCarouselComponent } from '@interface/components/game-carousel/game-carousel.component';
 import { LoadingSpinnerComponent } from '@interface/components/loading-spinner/loading-spinner.component';
-import { TranslationContent } from '@shared/constants/app.constants'; // Import TranslationContent
+import { TranslationContent } from '@shared/constants/app.constants';
 
 @Component({
   selector: 'app-home-page',
@@ -27,13 +27,14 @@ import { TranslationContent } from '@shared/constants/app.constants'; // Import 
   ],
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-  featuredGames = signal<Game[] | null>(null); // Pode ser nulo enquanto carrega
+  featuredGames = signal<Game[] | null>(null);
   isLoading = signal(true);
 
-  // Sinal computado para acessar as traduções reativamente do LanguageService
-  // Agora tipado corretamente para TranslationContent
   translations = computed<TranslationContent>(() =>
     this.languageService.translations(),
+  );
+  currentLanguage = computed<string>(
+    () => this.languageService.currentLanguage,
   );
 
   private gameSubscription!: Subscription;
@@ -46,13 +47,18 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // Inicializa o carregamento dos jogos
     this.loadFeaturedGames();
 
-    // Inscreve-se para mudanças de idioma para recarregar os jogos
-    // O sinal `translations` já reagirá automaticamente, mas recarregar os jogos
-    // garante que os dados do GameService sejam re-buscados com as novas traduções.
+    // Inscreve-se para mudanças de idioma para recarregar os jogos.
+    // O GameService já reage ao idioma, mas esta subscrição garante que o
+    // `loadFeaturedGames` seja explicitamente chamado, o que pode ser útil
+    // para redefinir o estado de carregamento e garantir a re-emissão.
     this.languageSubscription = this.languageService.currentLanguage$.subscribe(
       () => {
+        console.log(
+          'HomePageComponent: Language changed, reloading featured games.',
+        ); // Log para depuração
         this.loadFeaturedGames();
       },
     );
@@ -72,14 +78,16 @@ export class HomePageComponent implements OnInit, OnDestroy {
    */
   loadFeaturedGames(): void {
     this.isLoading.set(true);
+    console.log('HomePageComponent: Calling GameService.getFeaturedGames()'); // Log para depuração
     this.gameSubscription = this.gameService.getFeaturedGames().subscribe({
       next: (games: Game[]) => {
+        console.log('HomePageComponent: Received featured games:', games); // Log para depuração
         this.featuredGames.set(games);
         this.isLoading.set(false);
       },
       error: (err: any) => {
         console.error('Erro ao carregar jogos em destaque:', err);
-        this.featuredGames.set([]); // Define como array vazio em caso de erro
+        this.featuredGames.set([]);
         this.isLoading.set(false);
       },
     });

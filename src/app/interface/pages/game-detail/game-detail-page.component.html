@@ -1,7 +1,6 @@
 <!-- src/app/interface/pages/game-detail/game-detail-page.component.html -->
 
 <div class="game-detail-page-container container">
-  <!-- Correção: Remover () de breadcrumbs -->
   <app-breadcrumbs [path]="breadcrumbs"></app-breadcrumbs>
 
   @if (isLoading()) {
@@ -26,24 +25,28 @@
   } @else {
     <mat-card class="game-details-card">
       <mat-card-header>
-        <!-- game.name e game.description já vêm traduzidos do GameService -->
-        <mat-card-title class="game-title">{{ game()!.name }}</mat-card-title>
-        <!-- game.players e game.type podem precisar de tradução se forem chaves -->
+        <!-- Acessando o nome do jogo com base no idioma atual -->
+        <mat-card-title class="game-title">{{
+          game()!.name[currentLanguage()]
+        }}</mat-card-title>
         <mat-card-subtitle class="game-players-type">
-          {{ translations()[game()!.players] || game()!.players }} |
-          {{ translations()[game()!.type] || game()!.type }}
+          <!-- Acessando players e type com base no idioma atual -->
+          {{ game()!.players[currentLanguage()] }} |
+          {{ game()!.type[currentLanguage()] }}
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <!-- game.description já vem traduzido do GameService -->
-        <p class="game-description">{{ game()!.description }}</p>
+        <!-- Acessando a descrição do jogo com base no idioma atual -->
+        <p class="game-description">
+          {{ game()!.description[currentLanguage()] }}
+        </p>
 
         <mat-divider></mat-divider>
 
         <h2 class="how-to-play-title">{{ translations()["howToPlay"] }}</h2>
-        <!-- Renderiza o conteúdo Markdown das regras do jogo -->
+        <!-- Renderiza o conteúdo Markdown das regras do jogo usando translatedRulesPath -->
         <div class="markdown-content">
-          <markdown [src]="game()!.rulesPath"></markdown>
+          <markdown [src]="game()!.translatedRulesPath"></markdown>
         </div>
       </mat-card-content>
       <mat-card-actions class="game-actions">

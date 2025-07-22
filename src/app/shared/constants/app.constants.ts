@@ -45,7 +45,33 @@ export interface TranslationContent {
   homeBreadcrumb: string;
   gamesBreadcrumb: string;
   aboutBreadcrumb: string;
-  // Adicione outras chaves de tradução conforme necessário
+  // Categorias de jogos (para exibição no filtro)
+  NUMBER_OF_DECKS: string;
+  NUMBER_OF_PLAYERS: string;
+  TYPE: string;
+  // Novas chaves em inglês para os valores de categoria
+  one_deck: string;
+  two_decks: string;
+  six_to_eight_decks: string;
+  one_player: string;
+  two_to_four_players: string;
+  two_four_or_six_players: string;
+  two_to_ten_players: string;
+  one_plus_players: string;
+  four_players: string;
+  two_to_six_players: string;
+  two_to_eight_players: string;
+  solitaire_type: string;
+  truco_type: string;
+  strategy_type: string;
+  casino_type: string;
+  trick_taking_type: string;
+  shedding_type: string;
+  rummy_like_type: string;
+  // Adicionando chaves que faltam para os valores de categoria que podem estar em games.data.ts
+  two_to_five_players: string;
+  two_to_seven_players: string;
+  cards_type: string; // Tipo genérico para jogos de cartas
 }
 
 /**
@@ -110,25 +136,28 @@ export const TRANSLATIONS: Translations = {
     NUMBER_OF_DECKS: 'Número de Baralhos',
     NUMBER_OF_PLAYERS: 'Número de Jogadores',
     TYPE: 'Tipo de Jogo',
-    // Valores de categoria (se precisar de tradução específica para eles)
-    '1': '1 Baralho',
-    '2': '2 Baralhos',
-    '6-8': '6-8 Baralhos',
-    '1 jogador': '1 Jogador',
-    '2 a 4 jogadores': '2-4 Jogadores',
-    '2, 4 ou 6 jogadores': '2, 4 ou 6 Jogadores',
-    '2 a 10 jogadores': '2-10 Jogadores',
-    '1+ jogadores': '1+ Jogadores',
-    '4 jogadores': '4 Jogadores',
-    '2 a 6 jogadores': '2-6 Jogadores',
-    '2 a 8 jogadores': '2-8 Jogadores',
-    Paciência: 'Paciência',
-    Truco: 'Truco',
-    Estratégia: 'Estratégia',
-    Cassino: 'Cassino',
-    Vazas: 'Vazas',
-    Descarte: 'Descarte',
-    'Trinca/Sequência': 'Trinca/Sequência',
+    // Valores de categoria (agora usando chaves em inglês)
+    one_deck: '1 Baralho',
+    two_decks: '2 Baralhos',
+    six_to_eight_decks: '6-8 Baralhos',
+    one_player: '1 Jogador',
+    two_to_four_players: '2-4 Jogadores',
+    two_four_or_six_players: '2, 4 ou 6 Jogadores',
+    two_to_ten_players: '2-10 Jogadores',
+    one_plus_players: '1+ Jogadores',
+    four_players: '4 Jogadores',
+    two_to_six_players: '2-6 Jogadores',
+    two_to_eight_players: '2-8 Jogadores',
+    solitaire_type: 'Paciência',
+    truco_type: 'Truco',
+    strategy_type: 'Estratégia',
+    casino_type: 'Cassino',
+    trick_taking_type: 'Vazas',
+    shedding_type: 'Descarte',
+    rummy_like_type: 'Trinca/Sequência',
+    two_to_five_players: '2-5 Jogadores', // Adicionado
+    two_to_seven_players: '2-7 Jogadores', // Adicionado
+    cards_type: 'Cartas', // Adicionado
   },
   en: {
     appName: 'Card Games Hub',
@@ -176,24 +205,27 @@ export const TRANSLATIONS: Translations = {
     NUMBER_OF_DECKS: 'Number of Decks',
     NUMBER_OF_PLAYERS: 'Number of Players',
     TYPE: 'Game Type',
-    // Category values (if specific translation needed for them)
-    '1': '1 Deck',
-    '2': '2 Decks',
-    '6-8': '6-8 Decks',
-    '1 jogador': '1 Player',
-    '2 a 4 jogadores': '2-4 Players',
-    '2, 4 ou 6 jogadores': '2, 4 or 6 Players',
-    '2 a 10 jogadores': '2-10 Players',
-    '1+ jogadores': '1+ Players',
-    '4 jogadores': '4 Players',
-    '2 a 6 jogadores': '2-6 Players',
-    '2 a 8 jogadores': '2-8 Players',
-    Paciência: 'Solitaire',
-    Truco: 'Truco',
-    Estratégia: 'Strategy',
-    Cassino: 'Casino',
-    Vazas: 'Trick-taking',
-    Descarte: 'Discarding',
-    'Trinca/Sequência': 'Rummy-like',
+    // Valores de categoria (agora usando chaves em inglês)
+    one_deck: '1 Deck',
+    two_decks: '2 Decks',
+    six_to_eight_decks: '6-8 Decks',
+    one_player: '1 Player',
+    two_to_four_players: '2-4 Players',
+    two_four_or_six_players: '2, 4 or 6 Players',
+    two_to_ten_players: '2-10 Players',
+    one_plus_players: '1+ Players',
+    four_players: '4 Players',
+    two_to_six_players: '2-6 Players',
+    two_to_eight_players: '2-8 Players',
+    solitaire_type: 'Solitaire',
+    truco_type: 'Truco',
+    strategy_type: 'Strategy',
+    casino_type: 'Casino',
+    trick_taking_type: 'Trick-taking',
+    shedding_type: 'Shedding',
+    rummy_like_type: 'Rummy-like',
+    two_to_five_players: '2-5 Players', // Adicionado
+    two_to_seven_players: '2-7 Players', // Adicionado
+    cards_type: 'Cards', // Adicionado
   },
 };

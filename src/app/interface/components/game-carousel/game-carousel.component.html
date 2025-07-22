@@ -23,14 +23,21 @@
 
         @if (displayedGame(); as game) {
           <div class="game-details">
-            <h2 class="game-name">{{ game.name }}</h2>
-            <p class="game-description">{{ game.description }}</p>
+            <!-- Acessando o nome e a descrição do jogo com base no idioma atual (agora um signal) -->
+            <h2 class="game-name">
+              {{ game.name[currentLanguage()] }}
+            </h2>
+            <p class="game-description">
+              {{ game.description[currentLanguage()] }}
+            </p>
             <button
               mat-raised-button
               color="primary"
               (click)="onSelectGame(game.id)"
               [attr.aria-label]="
-                translations['viewDetailsFor'] + ' ' + game.name
+                translations['viewDetailsFor'] +
+                ' ' +
+                game.name[currentLanguage()]
               "
             >
               {{ translations["viewDetails"] }}

@@ -1,9 +1,9 @@
 // src/app/application/services/game/game.service.ts
 
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, computed } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { toObservable } from '@angular/core/rxjs-interop'; // Importar toObservable para sinais
+import { toObservable } from '@angular/core/rxjs-interop';
 
 import { Game } from '@domain/models/game.model';
 import { GAMES_DATA } from '@domain/data/games.data';
@@ -19,59 +19,73 @@ import { TranslationContent } from '@shared/constants/app.constants';
   providedIn: 'root',
 })
 export class GameService {
-  // Converte o sinal de traduções em um Observable para reatividade
   private translations$: Observable<TranslationContent>;
+  private currentLanguage: string;
 
   constructor(private languageService: LanguageService) {
-    // Converte o sinal de traduções do LanguageService em um Observable.
-    // Isso permite que o GameService reaja às mudanças de idioma.
     this.translations$ = toObservable(this.languageService.translations);
+    this.languageService.currentLanguage$.subscribe((lang) => {
+      this.currentLanguage = lang;
+      console.log('GameService: Current language updated to:', lang); // Log para depuração
+    });
+    this.currentLanguage = this.languageService.currentLanguage;
   }
 
   /**
-   * Retorna todos os jogos, com os nomes e descrições traduzidos para o idioma atual.
-   * Este Observable emitirá novos valores sempre que o idioma mudar.
+   * Retorna todos os jogos, com o caminho correto para as regras em Markdown.
+   * Os nomes e descrições, e agora também players e type, já estão no objeto Game para cada idioma.
    * @returns Um Observable de um array de objetos Game.
    */
   getAllGames(): Observable<Game[]> {
     return this.translations$.pipe(
-      map((currentTranslations) => {
-        // Mapeia os dados brutos dos jogos para incluir nomes e descrições traduzidos
+      map(() => {
+        console.log(
+          'GameService: getAllGames - mapping data for language:',
+          this.currentLanguage,
+        ); // Log para depuração
         return GAMES_DATA.map((game) =>
-          this.mapGameWithTranslations(game, currentTranslations),
+          this.addTranslatedRulesPath(game, this.currentLanguage),
         );
       }),
     );
   }
 
   /**
-   * Retorna os jogos em destaque, com os nomes e descrições traduzidos para o idioma atual.
-   * Este Observable emitirá novos valores sempre que o idioma mudar.
+   * Retorna os jogos em destaque, com o caminho correto para as regras em Markdown.
+   * Os nomes e descrições, e agora também players e type, já estão no objeto Game para cada idioma.
    * @returns Um Observable de um array de objetos Game.
    */
   getFeaturedGames(): Observable<Game[]> {
     return this.translations$.pipe(
-      map((currentTranslations) => {
+      map(() => {
+        console.log(
+          'GameService: getFeaturedGames - mapping data for language:',
+          this.currentLanguage,
+        ); // Log para depuração
         const featured = GAMES_DATA.filter((game) => game.featured);
         return featured.map((game) =>
-          this.mapGameWithTranslations(game, currentTranslations),
+          this.addTranslatedRulesPath(game, this.currentLanguage),
         );
       }),
     );
   }
 
   /**
-   * Retorna um jogo específico por ID, com o nome e a descrição traduzidos.
-   * Este Observable emitirá um novo valor sempre que o idioma mudar.
+   * Retorna um jogo específico por ID, com o caminho correto para as regras em Markdown.
+   * Os nomes e descrições, e agora também players e type, já estão no objeto Game para cada idioma.
    * @param id O ID do jogo.
    * @returns Um Observable do objeto Game, ou undefined se não encontrado.
    */
   getGameById(id: string): Observable<Game | undefined> {
     return this.translations$.pipe(
-      map((currentTranslations) => {
+      map(() => {
+        console.log(
+          'GameService: getGameById - mapping data for language:',
+          this.currentLanguage,
+        ); // Log para depuração
         const game = GAMES_DATA.find((g) => g.id === id);
         if (game) {
-          return this.mapGameWithTranslations(game, currentTranslations);
+          return this.addTranslatedRulesPath(game, this.currentLanguage);
         }
         return undefined;
       }),
@@ -79,21 +93,16 @@ export class GameService {
   }
 
   /**
-   * Mapeia um objeto Game para incluir as propriedades 'name' e 'description'
-   * com base nas chaves de tradução e no objeto de traduções atual.
+   * Adiciona a propriedade 'translatedRulesPath' ao objeto Game
+   * com base no idioma atual.
    * @param game O objeto Game original.
-   * @param translations O objeto de traduções para o idioma atual.
-   * @returns O objeto Game com nome e descrição traduzidos.
+   * @param currentLanguage O idioma atual ('pt' ou 'en').
+   * @returns O objeto Game com o caminho de regras traduzido.
    */
-  private mapGameWithTranslations(
-    game: Game,
-    translations: TranslationContent,
-  ): Game {
+  private addTranslatedRulesPath(game: Game, currentLanguage: string): Game {
     return {
       ...game,
-      // Acessa as traduções usando as chaves dinamicamente
-      name: translations[game.nameKey] || game.nameKey, // Fallback para a chave se a tradução não for encontrada
-      description: translations[game.descriptionKey] || game.descriptionKey, // Fallback para a chave
+      translatedRulesPath: `assets/rules/${currentLanguage}/${game.rulesPath}`,
     };
   }
 }

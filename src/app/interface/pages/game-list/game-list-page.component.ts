@@ -22,7 +22,7 @@ import {
   BreadcrumbItem,
 } from '@interface/components/breadcrumbs/breadcrumbs.component';
 import { FilterCategoryTypesPipe } from '@shared/pipes/filter-category-types/filter-category-types-pipe';
-import { TranslationContent } from '@shared/constants/app.constants'; // Importar TranslationContent
+import { TranslationContent } from '@shared/constants/app.constants';
 
 @Component({
   selector: 'app-game-list-page',
@@ -54,26 +54,30 @@ export class GameListPageComponent implements OnInit, OnDestroy {
 
   searchTerm = signal('');
   selectedCategoryType = signal('');
-  selectedCategoryValue = signal('');
+  selectedCategoryValue = signal(''); // Agora armazenará a chave em inglês
   displayCount = signal(5);
 
-  // Sinal computado para acessar as traduções reativamente
   translations = computed<TranslationContent>(() =>
     this.languageService.translations(),
   );
+  currentLanguage = computed<string>(
+    () => this.languageService.currentLanguage,
+  );
 
+  // Mapeia os valores do enum GAME_CATEGORIES para chaves de string
   availableCategoryTypes = computed(() => Object.values(GAME_CATEGORIES));
   availableCategoryValues = computed(() => {
     const type = this.selectedCategoryType();
     if (!type) return [];
-    // Mapeia os jogos filtrados para obter os valores únicos da categoria selecionada
-    return [
-      ...new Set(
-        this.allGames().map((game: Game) =>
-          game.categories ? game.categories[type] : undefined,
-        ),
-      ),
-    ].filter(Boolean);
+    // Mapeia os jogos para obter os valores únicos da categoria selecionada (que agora são chaves em inglês)
+    // Usamos um Set para garantir valores únicos
+    const values = new Set<string>();
+    this.allGames().forEach((game: Game) => {
+      if (game.categories && game.categories[type]) {
+        values.add(game.categories[type]);
+      }
+    });
+    return Array.from(values).filter(Boolean);
   });
   canLoadMore = computed(
     () => this.displayedGames().length < this.filteredGames().length,
@@ -91,10 +95,9 @@ export class GameListPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadAllGames();
 
-    // Inscreve-se para mudanças de idioma para recarregar os jogos e aplicar filtros
     this.languageSubscription = this.languageService.currentLanguage$.subscribe(
       () => {
-        this.loadAllGames(); // Recarrega os jogos com as novas traduções
+        this.loadAllGames();
       },
     );
   }
@@ -110,7 +113,6 @@ export class GameListPageComponent implements OnInit, OnDestroy {
 
   private loadAllGames(): void {
     this.isLoading.set(true);
-    // O GameService agora retorna jogos já traduzidos, então não precisamos de map aqui
     this.gameSubscription = this.gameService.getAllGames().subscribe({
       next: (games: Game[]) => {
         this.allGames.set(games);
@@ -131,10 +133,12 @@ export class GameListPageComponent implements OnInit, OnDestroy {
     const term = this.searchTerm().toLowerCase();
     const type = this.selectedCategoryType();
     const value = this.selectedCategoryValue();
+    const lang = this.currentLanguage();
 
     const filtered = this.allGames().filter((game: Game) => {
-      // A busca agora usa a propriedade 'name' do jogo, que já está traduzida
-      const matchesSearch = game.name?.toLowerCase().includes(term);
+      const gameNameInCurrentLang = game.name[lang]?.toLowerCase() || '';
+      const matchesSearch = gameNameInCurrentLang.includes(term);
+      // A comparação de categoria agora usa a chave em inglês armazenada em game.categories
       const matchesCategory =
         !type || !value || (game.categories && game.categories[type] === value);
       return matchesSearch && matchesCategory;
@@ -165,7 +169,7 @@ export class GameListPageComponent implements OnInit, OnDestroy {
   }
 
   get breadcrumbs(): BreadcrumbItem[] {
-    // Usando as traduções do sinal computado
+    // A trilha de navegação para a página de lista de jogos é fixa.
     return [
       { name: this.translations()['homeBreadcrumb'], path: '/home' },
       { name: this.translations()['gamesBreadcrumb'], path: null },
