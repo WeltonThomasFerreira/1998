@@ -23,25 +23,25 @@
   margin-top: $spacing-xl * 2; // Mais espaço abaixo do carrossel
   margin-bottom: $spacing-xl;
 
-  button {
-    padding: $spacing-md $spacing-xl;
-    font-size: $font-size-lg;
-    border-radius: $border-radius-md;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition:
-      background-color 0.2s ease,
-      box-shadow 0.2s ease,
-      transform 0.2s ease;
+  .view-all-games-button {
+    padding: $spacing-sm $spacing-md; /* Padding refinado, igual ao botão de detalhes */
+    font-size: $font-size-md; /* Tamanho do texto do botão, igual ao botão de detalhes */
+    border-radius: $border-radius-sm;
+    box-shadow: $shadow-md;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    background-color: var(--primary-color); /* Cor do botão azul como na imagem */
+    color: var(--primary-text-color); /* Cor do texto do botão */
 
     &:hover {
+      background-color: var(--button-hover-background-color); /* Usa a nova variável CSS */
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
       transform: translateY(-2px);
     }
 
     @media (max-width: $breakpoint-mobile) {
       width: 100%;
-      font-size: $font-size-md;
-      padding: $spacing-sm $spacing-lg;
+      font-size: $font-size-sm; /* Tamanho menor para mobile */
+      padding: $spacing-xs $spacing-sm; /* Padding ajustado para mobile */
     }
   }
 }
@@ -49,9 +49,10 @@
 .no-games-message {
   font-size: $font-size-lg;
   color: var(--text-color-secondary);
+  text-align: center;
   margin-top: $spacing-xl;
   padding: $spacing-md;
   background-color: var(--card-background-color);
   border-radius: $border-radius-md;
-  box-shadow: $shadow-md;
+  box-shadow: $shadow-md; // Usando a variável SCSS
 }

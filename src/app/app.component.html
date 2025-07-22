@@ -25,7 +25,8 @@
       </a>
     </mat-nav-list>
 
-    <mat-divider></mat-divider>
+    <!-- Removidos os switches de tema e idioma do sidenav, pois já estão na toolbar principal -->
+    <!-- <mat-divider></mat-divider>
 
     <mat-list>
       <mat-list-item>
@@ -49,7 +50,7 @@
           <span class="language-text">{{ currentLanguage() === 'pt' ? 'PT' : 'EN' }}</span>
         </mat-slide-toggle>
       </mat-list-item>
-    </mat-list>
+    </mat-list> -->
   </mat-sidenav>
 
   <!-- Conteúdo principal -->
@@ -63,7 +64,7 @@
       <!-- Título do aplicativo (centralizado) -->
       <div class="app-title-wrapper">
         <a routerLink="/home" class="app-title-link" [attr.aria-label]="translations()['appName']">
-          <span class="app-name">{{ translations()['appName'] }}</span> <!-- Nome do app fixo -->
+          <span class="app-name">{{ translations()['appName'] }}</span> <!-- Usa a tradução para o nome do app -->
         </a>
       </div>
 
