@@ -10,7 +10,7 @@
 .page-title {
   font-size: $font-size-4xl;
   font-weight: bold;
-  color: var(--text-color);
+  color: var(--text-color); // Garante bom contraste
   margin-bottom: $spacing-xl;
 
   @media (max-width: $breakpoint-mobile) {
@@ -19,95 +19,102 @@
   }
 }
 
-.about-card {
-  border-radius: $border-radius-lg;
-  box-shadow: $shadow-xl; // Sombra mais pronunciada para destaque
-  padding: $spacing-lg;
+.about-content-wrapper {
+  // Este wrapper substitui o mat-card principal para o layout de créditos
+  background-color: transparent; // Remove o fundo da "caixa"
+  box-shadow: none; // Remove a sombra
+  padding: 0; // Remove padding do wrapper, o conteúdo terá seu próprio padding
   margin-bottom: $spacing-xl;
-  text-align: left; // Conteúdo do card alinhado à esquerda
+  max-width: 800px; // Limita a largura para melhor legibilidade, como em créditos
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-description,
+.project-goal {
+  font-size: $font-size-lg; // Aumenta o tamanho da fonte para valorizar o texto
+  color: var(--text-color); // Garante bom contraste
+  margin-bottom: $spacing-lg; // Aumenta o espaçamento entre os parágrafos
+  line-height: 1.8; // Aumenta o espaçamento entre as linhas para melhor leitura
+  text-align: center; // Centraliza o texto
 
   @media (max-width: $breakpoint-mobile) {
-    padding: $spacing-md;
-  }
-
-  .about-description,
-  .project-goal {
     font-size: $font-size-md;
-    color: var(--text-color);
     margin-bottom: $spacing-md;
-    line-height: 1.6;
-
-    @media (max-width: $breakpoint-mobile) {
-      font-size: $font-size-sm;
-    }
   }
+}
 
-  mat-divider {
-    margin: $spacing-xl 0;
-    border-color: var(--border-color);
-  }
+mat-divider {
+  margin: $spacing-2xl auto; // Aumenta a margem e centraliza o divisor
+  border-color: var(--border-color); // Mantém a cor da borda, que é sutil
+  max-width: 600px; // Limita a largura do divisor
+}
 
-  .developers-title {
+.developers-title {
+  font-size: $font-size-3xl; // Aumenta o tamanho do título de desenvolvedores
+  font-weight: bold;
+  color: var(--text-color); // Garante bom contraste
+  margin-bottom: $spacing-lg;
+  text-align: center;
+
+  @media (max-width: $breakpoint-mobile) {
     font-size: $font-size-2xl;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-bottom: $spacing-md;
-    text-align: center;
+  }
+}
+
+.developers-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: $spacing-2xl; // Aumenta a margem inferior
+  text-align: center;
+  li {
+    font-size: $font-size-xl; // Aumenta o tamanho da fonte para os nomes
+    color: var(--text-color); // Garante bom contraste
+    margin-bottom: $spacing-md; // Aumenta o espaçamento entre os nomes
 
     @media (max-width: $breakpoint-mobile) {
-      font-size: $font-size-xl;
-    }
-  }
-
-  .developers-list {
-    list-style: none; // Remove bullets padrão
-    padding: 0;
-    margin-bottom: $spacing-xl;
-    text-align: center; // Centraliza a lista
-    li {
-      font-size: $font-size-md;
-      color: var(--text-color-secondary);
-      margin-bottom: $spacing-xs;
-
-      @media (max-width: $breakpoint-mobile) {
-        font-size: $font-size-sm;
-      }
-    }
-  }
-
-  .version-info {
-    font-size: $font-size-sm;
-    color: var(--text-color-secondary);
-    text-align: center;
-    margin-top: $spacing-lg;
-  }
-
-  .about-actions {
-    display: flex;
-    justify-content: center; // Centraliza o botão
-    padding-top: $spacing-xl;
-    border-top: 1px solid var(--border-color);
-
-    button {
-      padding: $spacing-md $spacing-xl;
       font-size: $font-size-lg;
-      border-radius: $border-radius-md;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition:
-        background-color 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
-
-      &:hover {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        transform: translateY(-2px);
-      }
-
-      @media (max-width: $breakpoint-mobile) {
-        width: 100%;
-        font-size: $font-size-md;
-        padding: $spacing-sm $spacing-lg;
-      }
+      margin-bottom: $spacing-sm;
     }
   }
 }
+
+.version-info {
+  font-size: $font-size-lg; // Aumenta o tamanho da fonte
+  color: var(--text-color); // Garante bom contraste
+  text-align: center;
+  margin-top: $spacing-2xl; // Aumenta a margem superior
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: $font-size-md;
+  }
+}
+
+// Removidos os estilos para .about-actions e button, pois o botão foi removido
+/*
+.about-actions {
+  display: flex;
+  justify-content: center;
+  padding-top: $spacing-xl;
+  border-top: 1px solid var(--border-color);
+
+  button {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-lg;
+    border-radius: $border-radius-md;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      width: 100%;
+      font-size: $font-size-md;
+      padding: $spacing-sm $spacing-lg;
+    }
+  }
+}
+*/

@@ -5,30 +5,28 @@
 
   <h1 class="page-title">{{ translations()["aboutProject"] }}</h1>
 
-  <mat-card class="about-card">
-    <mat-card-content>
-      <p class="about-description">{{ translations()["aboutDescription"] }}</p>
-      <p class="project-goal">{{ translations()["projectGoal"] }}</p>
+  <!-- Conteúdo principal da página "Sobre" sem o mat-card externo -->
+  <div class="about-content-wrapper">
+    <p class="about-description">{{ translations()["aboutDescription"] }}</p>
+    <p class="project-goal">{{ translations()["projectGoal"] }}</p>
 
-      <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
-      <h2 class="developers-title">{{ translations()["developers"] }}</h2>
-      <ul class="developers-list">
-        <li>{{ translations()["developerName1"] }}</li>
-        <li>{{ translations()["developerName2"] }}</li>
-      </ul>
+    <h2 class="developers-title">{{ translations()["developers"] }}</h2>
+    <ul class="developers-list">
+      <li>{{ translations()["developerName1"] }}</li>
+      <li>{{ translations()["developerName2"] }}</li>
+    </ul>
 
-      <p class="version-info">{{ translations()["versionInfo"] }}</p>
-    </mat-card-content>
-    <mat-card-actions class="about-actions">
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="backToHome()"
-        [attr.aria-label]="translations()['backToHome']"
-      >
-        {{ translations()["backToHome"] }}
+    <p class="version-info">{{ translations()["versionInfo"] }}</p>
+
+    <!-- Removido o botão "Voltar para o Início" -->
+    <!--
+    <div class="about-actions">
+      <button mat-raised-button color="primary" (click)="backToHome()" [attr.aria-label]="translations()['backToHome']">
+        {{ translations()['backToHome'] }}
       </button>
-    </mat-card-actions>
-  </mat-card>
+    </div>
+    -->
+  </div>
 </div>

@@ -123,7 +123,7 @@ export const TRANSLATIONS: Translations = {
       'O objetivo é fornecer uma plataforma amigável com informações detalhadas sobre regras, número de jogadores e categorias de jogos.',
     developers: 'Desenvolvedores',
     developerName1: 'Thomas',
-    developerName2: 'Gemini',
+    developerName2: 'Laís',
     versionInfo: 'Versão 1.0.0',
     backToHome: 'Voltar para o Início',
     closeMenu: 'Fechar menu', // Para acessibilidade
@@ -193,7 +193,7 @@ export const TRANSLATIONS: Translations = {
       'The goal is to provide a user-friendly platform with detailed information on rules, number of players, and game categories.',
     developers: 'Developers',
     developerName1: 'Thomas',
-    developerName2: 'Gemini',
+    developerName2: 'Laís',
     versionInfo: 'Version 1.0.0',
     backToHome: 'Back to Home',
     closeMenu: 'Close menu', // For accessibility

@@ -145,7 +145,7 @@ export class GameListPageComponent implements OnInit, OnDestroy {
     });
 
     this.filteredGames.set(filtered);
-    this.displayCount.set(5);
+    this.displayCount.set(6);
     this.updateDisplayedGames();
   }
 
@@ -157,7 +157,7 @@ export class GameListPageComponent implements OnInit, OnDestroy {
     if (this.canLoadMore() && !this.isLoadingMore()) {
       this.isLoadingMore.set(true);
       setTimeout(() => {
-        this.displayCount.update((count) => count + 5);
+        this.displayCount.update((count) => count + 6);
         this.updateDisplayedGames();
         this.isLoadingMore.set(false);
       }, 500);

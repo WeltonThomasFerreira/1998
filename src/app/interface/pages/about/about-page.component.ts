@@ -69,10 +69,8 @@ export class AboutPageComponent implements OnInit, OnDestroy {
     ];
   }
 
-  /**
-   * Navega de volta para a página inicial.
-   */
-  backToHome(): void {
-    this.router.navigate(['/home']);
-  }
+  // Removido o método backToHome()
+  // backToHome(): void {
+  //   this.router.navigate(['/home']);
+  // }
 }
