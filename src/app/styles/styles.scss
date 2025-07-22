@@ -64,13 +64,7 @@ $shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 
   // Cor do ícone da toolbar para o tema claro (cor do texto principal do cabeçalho)
   --toolbar-icon-color: var(--primary-text-color); // Ícones da cor do texto do logo (branco)
   --logo-background-color: #bd93f9; // Roxo do Dracula para o fundo do logo
-  --logo-text-color: #000000; // Texto PRETO para o logo
-
-  // Cor do botão no hover para o tema claro
-  --button-hover-background-color: #3f51b5; // Um tom de azul mais escuro
-
-  // Cor do texto do switch de idioma no modo claro
-  --language-switch-text-color: #f8f8f2; // Branco para melhor contraste
+  --logo-text-color: var(--primary-text-color); // Alterado para usar a cor do texto primário (branco)
 }
 
 /* Estilos para o tema escuro (aplicados quando a classe 'dark-theme' está no <html>) */
@@ -81,8 +75,8 @@ html.dark-theme {
   --hover-background-color: #6272a4; // Fundo ao passar o mouse (cyan claro)
   --border-color: #6272a4; // Cor de bordas
 
-  --text-color: #f8f8f2; // Texto principal (foreground do Dracula) - Aumentado contraste
-  --text-color-secondary: #bd93f9; // Texto secundário (purple do Dracula) - Aumentado contraste
+  --text-color: #f8f8f2; // Texto principal (foreground do Dracula)
+  --text-color-secondary: #bd93f9; // Texto secundário (purple do Dracula)
 
   // Cores do cabeçalho - consistentes com o cabeçalho da imagem do Dracula Theme
   --primary-color: #1a1a1a; // Fundo do cabeçalho no modo escuro (quase preto, como na imagem)
@@ -98,13 +92,7 @@ html.dark-theme {
   // Cor do ícone da toolbar para o tema escuro (cor do texto principal do cabeçalho)
   --toolbar-icon-color: var(--primary-text-color); // Ícones da cor do texto do logo (branco)
   --logo-background-color: #bd93f9; // Roxo do Dracula para o fundo do logo
-  --logo-text-color: #000000; // Texto PRETO para o logo
-
-  // Cor do botão no hover para o tema escuro
-  --button-hover-background-color: #64b5f6; // Um tom de azul mais escuro
-
-  // Cor do texto do switch de idioma no modo escuro
-  --language-switch-text-color: #f8f8f2; // Branco para melhor contraste
+  --logo-text-color: var(--primary-text-color); // Alterado para usar a cor do texto primário (branco)
 }
 
 /* Estilos globais para html e body */
@@ -192,21 +180,21 @@ router-outlet + * {
     font-size: $font-size-4xl;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
-    color: var(--primary-color);
+    color: var(--text-color); // Alterado para text-color
   }
 
   h2 {
     font-size: $font-size-3xl;
     margin-top: 1.2em;
     margin-bottom: 0.4em;
-    color: var(--primary-color);
+    color: var(--text-color); // Alterado para text-color
   }
 
   h3 {
     font-size: $font-size-2xl;
     margin-top: 1em;
     margin-bottom: 0.3em;
-    color: var(--primary-color);
+    color: var(--text-color); // Alterado para text-color
   }
 
   p {
@@ -248,11 +236,11 @@ router-outlet + * {
   }
 }
 
-// Estilos para MatCard
+// Estilos para MatCard - Removido !important para permitir sobrescrita
 mat-card {
-  background-color: var(--card-background) !important;
-  color: var(--card-text) !important;
-  box-shadow: $shadow-md !important;
+  background-color: var(--card-background);
+  color: var(--card-text);
+  box-shadow: $shadow-md;
 }
 
 // Estilos para MatChip
@@ -265,7 +253,7 @@ mat-chip-listbox mat-chip {
 // Estilos para MatToolbar
 mat-toolbar {
   background-color: var(--primary-color) !important;
-  color: var(--mat-sys-on-primary) !important;
+  color: var(--primary-text-color) !important; // Garante que o texto do toolbar use a cor primária do texto
 }
 
 // Estilo para o logo do aplicativo no cabeçalho (Mantido no styles.scss)
@@ -305,20 +293,19 @@ mat-toolbar {
   color: var(--text-color) !important;
   border-radius: $border-radius-md !important;
   box-shadow: $shadow-xl !important;
-  // Adiciona um padding interno para o conteúdo do painel, se necessário
   padding: $spacing-sm !important;
 }
 
 /* Estilos para as opções dentro dos painéis de dropdown */
 .mat-mdc-option {
   color: var(--text-color) !important;
-  padding: $spacing-sm $spacing-md !important; /* Ajustado o padding para as opções */
+  padding: $spacing-sm $spacing-md !important;
 
   &:hover {
     background-color: var(--hover-background-color) !important;
   }
   &.mat-mdc-option-active {
-    background-color: rgba(var(--primary-color-rgb), 0.1) !important; // Um tom mais claro da cor primária
+    background-color: rgba(var(--primary-color-rgb), 0.1) !important;
     color: var(--primary-color) !important;
   }
   &.mat-mdc-option-selected:not(.mat-mdc-option-multiple) {

@@ -6,116 +6,119 @@
   padding-top: $spacing-md;
 }
 
-.game-details-card {
-  border-radius: $border-radius-lg;
-  box-shadow: $shadow-xl; // Sombra mais pronunciada para destaque
-  padding: $spacing-lg;
+.game-content-wrapper {
+  // Este wrapper substitui o mat-card principal para o layout
+  // Não tem background ou sombra para ser "clean"
   margin-bottom: $spacing-xl;
+  padding: 0; // O padding será aplicado internamente aos elementos de texto
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: $spacing-md;
+}
+
+.game-title {
+  font-size: $font-size-4xl;
+  font-weight: bold;
+  color: var(--text-color); // Usar text-color para melhor contraste
+  margin-bottom: $spacing-sm;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: $font-size-3xl;
+  }
+}
+
+.game-players-type {
+  font-size: $font-size-lg;
+  color: var(--text-color); // Alterado para text-color para unificar a cor do texto
+  margin-bottom: $spacing-lg;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: $font-size-md;
+  }
+}
+
+.game-description {
+  font-size: $font-size-md;
+  color: var(--text-color); // Usar text-color para melhor contraste
+  margin-bottom: $spacing-xl;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 800px; /* Limita a largura da descrição para melhor legibilidade */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 $spacing-lg; /* Adiciona padding horizontal para aproveitar o espaço */
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: $font-size-sm;
+    padding: 0 $spacing-md; /* Ajusta padding horizontal em mobile */
+  }
+}
+
+mat-divider {
+  margin: $spacing-xl auto; // Centraliza o divider
+  border-color: var(--border-color); // Mantém a cor da borda, que é sutil
+  max-width: 800px; // Limita a largura do divider
+}
+
+.how-to-play-title {
+  font-size: $font-size-3xl;
+  font-weight: bold;
+  color: var(--text-color); // Usar text-color para melhor contraste
+  margin-bottom: $spacing-lg;
+  text-align: center;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: $font-size-2xl;
+  }
+}
+
+.markdown-content {
+  // Já está transparente e sem sombra, mantendo o foco no conteúdo
+  padding: $spacing-lg; // Aumenta o padding para melhor leitura
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  line-height: 1.7;
+  color: var(--text-color); // Garante que o texto do markdown use a cor principal
+  max-width: 800px; /* Limita a largura do conteúdo markdown para melhor legibilidade */
+  margin-left: auto;
+  margin-right: auto;
 
   @media (max-width: $breakpoint-mobile) {
     padding: $spacing-md;
   }
+}
 
-  mat-card-header {
-    display: block; // Garante que título e subtítulo fiquem em linhas separadas
-    margin-bottom: $spacing-md;
-    text-align: center;
-  }
+.game-actions {
+  display: flex;
+  justify-content: center;
+  padding-top: $spacing-xl;
+  border-top: 1px solid var(--border-color);
+  max-width: 800px; // Limita a largura da seção de ações
+  margin: $spacing-xl auto 0; // Centraliza e adiciona margem superior
 
-  .game-title {
-    font-size: $font-size-4xl;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-bottom: $spacing-sm;
-
-    @media (max-width: $breakpoint-mobile) {
-      font-size: $font-size-3xl;
-    }
-  }
-
-  .game-players-type {
+  button {
+    padding: $spacing-md $spacing-xl;
     font-size: $font-size-lg;
-    color: var(--text-color-secondary);
-    margin-bottom: $spacing-lg;
-
-    @media (max-width: $breakpoint-mobile) {
-      font-size: $font-size-md;
-    }
-  }
-
-  .game-description {
-    font-size: $font-size-md;
-    color: var(--text-color);
-    margin-bottom: $spacing-xl;
-    line-height: 1.6;
-
-    @media (max-width: $breakpoint-mobile) {
-      font-size: $font-size-sm;
-    }
-  }
-
-  mat-divider {
-    margin: $spacing-xl 0;
-    border-color: var(--border-color);
-  }
-
-  .how-to-play-title {
-    font-size: $font-size-3xl;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-bottom: $spacing-lg;
-    text-align: center;
-
-    @media (max-width: $breakpoint-mobile) {
-      font-size: $font-size-2xl;
-    }
-  }
-
-  .markdown-content {
-    // Estilos para o conteúdo Markdown são definidos globalmente em styles.scss
-    // Aqui você pode adicionar ajustes específicos se necessário
-    padding: $spacing-md;
-    background-color: var(
-      --background-color
-    ); // Fundo para o conteúdo das regras
     border-radius: $border-radius-md;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05); // Sombra interna sutil
-    line-height: 1.7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
 
     @media (max-width: $breakpoint-mobile) {
-      padding: $spacing-sm;
-    }
-  }
-
-  .game-actions {
-    display: flex;
-    justify-content: center; // Centraliza o botão
-    padding-top: $spacing-xl;
-    border-top: 1px solid var(--border-color);
-
-    button {
-      padding: $spacing-md $spacing-xl;
-      font-size: $font-size-lg;
-      border-radius: $border-radius-md;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition:
-        background-color 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
-
-      &:hover {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        transform: translateY(-2px);
-      }
-
-      @media (max-width: $breakpoint-mobile) {
-        width: 100%;
-        font-size: $font-size-md;
-        padding: $spacing-sm $spacing-lg;
-      }
+      width: 100%;
+      font-size: $font-size-md;
+      padding: $spacing-sm $spacing-lg;
     }
   }
 }
+
 
 .game-not-found-card {
   border-radius: $border-radius-lg;
