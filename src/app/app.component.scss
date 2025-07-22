@@ -183,3 +183,7 @@
     width: 200px; /* Sidenav um pouco menor em telas pequenas */
   }
 }
+
+.language-button .language-text {
+  color: var(--language-switch-text-color);
+}

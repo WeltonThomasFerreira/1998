@@ -35,12 +35,9 @@ $breakpoint-mobile: 600px;
 $breakpoint-tablet: 960px;
 
 /* Variáveis SCSS para sombras */
-$shadow-md:
-  0 4px 6px -1px rgba(0, 0, 0, 0.1),
-  0 2px 4px -1px rgba(0, 0, 0, 0.06);
-$shadow-xl:
-  0 20px 25px -5px rgba(0, 0, 0, 0.1),
-  0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
 
 /* Estilos para o tema claro (aplicados quando a classe 'light-theme' está no <html>) */
 .light-theme {
@@ -65,11 +62,15 @@ $shadow-xl:
   --chip-border-color: #ba68c8; // Roxo médio
 
   // Cor do ícone da toolbar para o tema claro (cor do texto principal do cabeçalho)
-  --toolbar-icon-color: var(
-    --primary-text-color
-  ); // Ícones da cor do texto do logo (branco)
+  --toolbar-icon-color: var(--primary-text-color); // Ícones da cor do texto do logo (branco)
   --logo-background-color: #bd93f9; // Roxo do Dracula para o fundo do logo
   --logo-text-color: #000000; // Texto PRETO para o logo
+
+  // Cor do botão no hover para o tema claro
+  --button-hover-background-color: #3f51b5; // Um tom de azul mais escuro
+
+  // Cor do texto do switch de idioma no modo claro
+  --language-switch-text-color: #f8f8f2; // Branco para melhor contraste
 }
 
 /* Estilos para o tema escuro (aplicados quando a classe 'dark-theme' está no <html>) */
@@ -80,8 +81,8 @@ html.dark-theme {
   --hover-background-color: #6272a4; // Fundo ao passar o mouse (cyan claro)
   --border-color: #6272a4; // Cor de bordas
 
-  --text-color: #f8f8f2; // Texto principal (foreground do Dracula)
-  --text-color-secondary: #bd93f9; // Texto secundário (purple do Dracula)
+  --text-color: #f8f8f2; // Texto principal (foreground do Dracula) - Aumentado contraste
+  --text-color-secondary: #bd93f9; // Texto secundário (purple do Dracula) - Aumentado contraste
 
   // Cores do cabeçalho - consistentes com o cabeçalho da imagem do Dracula Theme
   --primary-color: #1a1a1a; // Fundo do cabeçalho no modo escuro (quase preto, como na imagem)
@@ -95,16 +96,19 @@ html.dark-theme {
   --chip-border-color: #ff79c6; // Borda rosa do Dracula
 
   // Cor do ícone da toolbar para o tema escuro (cor do texto principal do cabeçalho)
-  --toolbar-icon-color: var(
-    --primary-text-color
-  ); // Ícones da cor do texto do logo (branco)
+  --toolbar-icon-color: var(--primary-text-color); // Ícones da cor do texto do logo (branco)
   --logo-background-color: #bd93f9; // Roxo do Dracula para o fundo do logo
   --logo-text-color: #000000; // Texto PRETO para o logo
+
+  // Cor do botão no hover para o tema escuro
+  --button-hover-background-color: #64b5f6; // Um tom de azul mais escuro
+
+  // Cor do texto do switch de idioma no modo escuro
+  --language-switch-text-color: #f8f8f2; // Branco para melhor contraste
 }
 
 /* Estilos globais para html e body */
-html,
-body {
+html, body {
   height: 100%;
   margin: 0;
   font-family: "Inter", sans-serif; // Usando a fonte Inter
@@ -112,9 +116,7 @@ body {
   /* Aplica as variáveis CSS de tema diretamente ao html/body */
   background-color: var(--background-color);
   color: var(--text-color);
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease; /* Transição suave para mudança de tema */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave para mudança de tema */
   overflow-x: hidden; /* Evita rolagem horizontal indesejada */
 }
 
@@ -263,9 +265,7 @@ mat-chip-listbox mat-chip {
 // Estilos para MatToolbar
 mat-toolbar {
   background-color: var(--primary-color) !important;
-  color: var(
-    --primary-text-color
-  ) !important; // Garante que o texto do toolbar use a cor primária do texto
+  color: var(--mat-sys-on-primary) !important;
 }
 
 // Estilo para o logo do aplicativo no cabeçalho (Mantido no styles.scss)
@@ -275,17 +275,11 @@ mat-toolbar {
   gap: $spacing-sm; /* Espaçamento entre ícone e texto */
   padding: $spacing-sm $spacing-md; /* Aumentado o padding para mais destaque */
   border-radius: $border-radius-md; /* Borda um pouco mais arredondada */
-  background-color: var(
-    --logo-background-color
-  ); // Fundo do logo, definido em styles.scss
-  color: var(
-    --logo-text-color
-  ); // Cor do texto do logo, definido em styles.scss
+  background-color: var(--logo-background-color); // Fundo do logo, definido em styles.scss
+  color: var(--logo-text-color); // Cor do texto do logo, definido em styles.scss
   font-weight: bold;
   text-decoration: none;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
   white-space: nowrap; /* Evita quebra de linha no texto do logo */
 
   &:hover {
@@ -296,13 +290,39 @@ mat-toolbar {
     font-size: $font-size-2xl; /* Ícone maior */
     width: $font-size-2xl;
     height: $font-size-2xl;
-    color: var(
-      --logo-text-color
-    ); // Garante que o ícone também use a cor do texto do logo
+    color: var(--logo-text-color); // Garante que o ícone também use a cor do texto do logo
   }
 
   span {
     font-size: $font-size-xl; /* Texto maior */
     line-height: 1;
+  }
+}
+
+/* Estilos para painéis de dropdown do Angular Material */
+.mat-mdc-select-panel {
+  background-color: var(--card-background-color) !important;
+  color: var(--text-color) !important;
+  border-radius: $border-radius-md !important;
+  box-shadow: $shadow-xl !important;
+  // Adiciona um padding interno para o conteúdo do painel, se necessário
+  padding: $spacing-sm !important;
+}
+
+/* Estilos para as opções dentro dos painéis de dropdown */
+.mat-mdc-option {
+  color: var(--text-color) !important;
+  padding: $spacing-sm $spacing-md !important; /* Ajustado o padding para as opções */
+
+  &:hover {
+    background-color: var(--hover-background-color) !important;
+  }
+  &.mat-mdc-option-active {
+    background-color: rgba(var(--primary-color-rgb), 0.1) !important; // Um tom mais claro da cor primária
+    color: var(--primary-color) !important;
+  }
+  &.mat-mdc-option-selected:not(.mat-mdc-option-multiple) {
+    background-color: var(--primary-color) !important;
+    color: var(--primary-text-color) !important;
   }
 }

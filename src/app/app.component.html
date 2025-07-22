@@ -3,13 +3,6 @@
 <mat-sidenav-container class="sidenav-container">
   <!-- Sidenav de navegação -->
   <mat-sidenav #sidenav mode="over" class="sidenav">
-    <mat-toolbar class="sidenav-toolbar">
-      <span class="app-name-sidenav">{{ translations()['appName'] }}</span>
-      <button mat-icon-button (click)="closeSidenav()" [attr.aria-label]="translations()['closeMenu']">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-toolbar>
-
     <mat-nav-list (click)="closeSidenav()">
       <a mat-list-item routerLink="/home" routerLinkActive="active-link" [attr.aria-label]="translations()['home']">
         <mat-icon matListItemIcon>home</mat-icon>
