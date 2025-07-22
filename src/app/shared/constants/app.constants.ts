@@ -91,7 +91,7 @@ export interface Translations {
  */
 export const TRANSLATIONS: Translations = {
   pt: {
-    appName: 'Baralho de Jogos',
+    appName: '1998',
     home: 'Início',
     games: 'Jogos',
     about: 'Sobre',
@@ -160,7 +160,7 @@ export const TRANSLATIONS: Translations = {
     cards_type: 'Cartas', // Adicionado
   },
   en: {
-    appName: 'Card Games Hub',
+    appName: '1998',
     home: 'Home',
     games: 'Games',
     about: 'About',

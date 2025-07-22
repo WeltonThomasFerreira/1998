@@ -1,107 +1,188 @@
 /* src/app/interface/components/game-carousel/game-carousel.component.scss */
 
 @use "styles.scss" as *; // Importa as variáveis e mixins globais
+@use "sass:math"; // Importa o módulo math do Sass
 
-.carousel-container {
+.game-carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  max-width: 960px; // $breakpoint-tablet
-  margin: $spacing-xl auto;
-  padding: $spacing-md;
-  box-sizing: border-box;
-
-  @media (min-width: $breakpoint-mobile) {
-    padding: $spacing-lg;
-  }
+  padding: $spacing-md 0;
 }
 
-.carousel-card {
-  border-radius: $border-radius-lg;
-  overflow: hidden;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); // Sombra mais pronunciada
-  transition: transform 0.3s ease;
-  min-height: 250px; // Altura mínima para o card do carrossel
+.carousel-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center; /* Centraliza o spinner se não houver jogos */
+  width: 100%;
+  max-width: 1000px; /* Aumenta a largura máxima para caber mais cards */
+  position: relative;
+  justify-content: space-between; /* Alinha botões nas extremidades */
 }
 
 .carousel-content {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: $spacing-md;
+  overflow: hidden; /* Esconde cards que ultrapassam a largura */
+  flex-grow: 1; /* Permite que o conteúdo do carrossel ocupe o espaço */
+  justify-content: center; /* Centraliza os cards dentro do conteúdo visível */
+  gap: $spacing-lg; /* Espaçamento entre os cards */
+  padding: 0 $spacing-md; /* Padding para garantir que cards parciais sejam visíveis nas bordas */
 
   @media (max-width: $breakpoint-mobile) {
-    flex-direction: column;
-    text-align: center;
-    padding: $spacing-sm;
+    gap: $spacing-md;
+    padding: 0 $spacing-sm;
+    justify-content: flex-start; /* Alinha à esquerda no mobile para rolagem */
+    overflow-x: auto; /* Permite rolagem horizontal no mobile */
+    -webkit-overflow-scrolling: touch; /* Rolagem suave em iOS */
+    scroll-snap-type: x mandatory; /* Para rolagem com "snap" nos cards */
   }
 }
 
-.game-details {
-  flex-grow: 1;
-  text-align: center;
-  padding: 0 $spacing-md;
-
-  @media (max-width: $breakpoint-mobile) {
-    padding: $spacing-md 0;
-  }
-}
-
-.game-name {
-  font-size: $font-size-3xl;
-  font-weight: bold;
-  color: var(--text-color);
-  margin-bottom: $spacing-sm;
-
-  @media (max-width: $breakpoint-mobile) {
-    font-size: $font-size-2xl;
-  }
-}
-
-.game-description {
-  font-size: $font-size-md;
-  color: var(--text-color-secondary);
-  margin-bottom: $spacing-md;
-
-  @media (max-width: $breakpoint-mobile) {
-    font-size: $font-size-sm;
-  }
-}
-
-button[mat-icon-button] {
-  color: var(--primary-color);
-  background-color: var(--hover-background-color);
+.carousel-control-button {
+  background-color: transparent; /* Botões transparentes como na imagem */
+  color: var(--text-color); /* Cor do ícone */
   border-radius: 50%;
   width: 48px;
   height: 48px;
-  min-width: 48px; // Garante tamanho mínimo
-  transition:
-    background-color 0.2s ease,
-    transform 0.2s ease;
+  min-width: 48px;
+  box-shadow: none; /* Remove sombra */
+  transition: color 0.2s ease, transform 0.2s ease;
+  z-index: 10;
 
   &:hover {
-    background-color: var(--primary-color);
-    color: var(--primary-text-color);
+    color: var(--primary-color); /* Cor primária no hover */
     transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.1); /* Um leve fundo no hover */
+  }
+
+  .mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  &.prev-button {
+    margin-right: $spacing-md;
+  }
+
+  &.next-button {
+    margin-left: $spacing-md;
   }
 
   @media (max-width: $breakpoint-mobile) {
-    margin: $spacing-sm 0;
+    // Oculta os botões de controle no mobile se a rolagem for a principal interação
+    display: none; // Removendo botões no mobile para focar na rolagem por arrasto
   }
 }
 
-button[mat-raised-button] {
-  padding: $spacing-sm $spacing-lg;
-  font-size: $font-size-md;
-  border-radius: $border-radius-md;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition:
-    background-color 0.2s ease,
-    box-shadow 0.2s ease;
+.game-card {
+  flex-shrink: 0; /* Impede que os cards encolham */
+  width: 280px; /* Largura fixa para cada card, similar à imagem, AGORA IGUAL PARA MOBILE E DESKTOP */
+  background-color: var(--card-background-color); /* Fundo escuro do card */
+  color: var(--card-text);
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-xl;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição para o card */
+  cursor: pointer; /* Indica que o card é clicável */
+  scroll-snap-align: center; /* Para o "snap" de rolagem */
 
   &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px); /* Efeito de elevação no hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   }
+
+  // Removida a media query específica para largura do card no mobile
+  // @media (max-width: $breakpoint-mobile) {
+  //   width: 240px; /* Largura menor para cards no mobile */
+  // }
+
+  .game-image {
+    width: 100%;
+    height: 180px; /* Altura fixa para a imagem, como na imagem de referência, AGORA IGUAL PARA MOBILE E DESKTOP */
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color); /* Linha sutil abaixo da imagem */
+
+    // Removida a media query específica para altura da imagem no mobile
+    // @media (max-width: $breakpoint-mobile) {
+    //   height: 140px; /* Altura menor para mobile */
+    // }
+  }
+
+  .game-info {
+    padding: $spacing-md; /* Padding interno do card */
+    flex-grow: 1; /* Permite que as informações ocupem o espaço restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinha o conteúdo ao topo */
+    text-align: left; /* Alinha o texto à esquerda como na imagem */
+  }
+
+  .game-name {
+    font-size: $font-size-2xl; /* Título maior e mais proeminente */
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: $spacing-sm; /* Margem ajustada */
+    line-height: 1.2; /* Espaçamento de linha mais apertado */
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: $font-size-xl;
+    }
+  }
+
+  .game-description {
+    font-size: $font-size-md; /* Descrição refinada */
+    color: var(--text-color-secondary);
+    margin-bottom: $spacing-md; /* Margem ajustada */
+    flex-grow: 1; /* Permite que a descrição ocupe o espaço */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limita a 2 linhas para ser mais compacto */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4; /* Espaçamento de linha mais apertado */
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: $font-size-sm;
+      -webkit-line-clamp: 3; /* Mais linhas em mobile se necessário */
+    }
+  }
+
+  .view-details-button {
+    padding: $spacing-sm $spacing-md; /* Padding refinado */
+    font-size: $font-size-md; /* Tamanho do texto do botão */
+    border-radius: $border-radius-sm;
+    box-shadow: $shadow-md;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    width: fit-content; /* Ajusta a largura do botão ao conteúdo */
+    margin-top: $spacing-md; /* Adiciona margem acima do botão */
+    background-color: var(--primary-color); /* Cor do botão azul como na imagem */
+    color: var(--primary-text-color); /* Cor do texto do botão */
+
+    &:hover {
+      background-color: var(--button-hover-background-color); /* Usa a nova variável CSS */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: $font-size-sm;
+      padding: $spacing-xs $spacing-sm;
+    }
+  }
+}
+
+.no-games-message {
+  font-size: $font-size-lg;
+  color: var(--text-color-secondary);
+  text-align: center;
+  padding: $spacing-md;
+  background-color: var(--card-background-color);
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
+  width: 100%;
+  max-width: 600px;
+  margin: $spacing-xl auto;
 }

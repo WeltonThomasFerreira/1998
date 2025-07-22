@@ -1,59 +1,59 @@
 <!-- src/app/interface/components/game-carousel/game-carousel.component.html -->
 
-<div class="carousel-container">
-  @if (games === null) {
-    <app-loading-spinner></app-loading-spinner>
-  } @else if (games.length === 0) {
-    <mat-card class="carousel-card">
-      <mat-card-content>
-        <p>{{ translations["noFeaturedGames"] }}</p>
-      </mat-card-content>
-    </mat-card>
+<div class="game-carousel-container">
+  @if (games.length === 0) {
+    <div class="no-games-message">{{ translations["noGamesFound"] }}</div>
   } @else {
-    <mat-card class="carousel-card">
-      <div class="carousel-content">
-        <button
-          mat-icon-button
-          (click)="prevSlide()"
-          [disabled]="games.length <= 1"
-          [attr.aria-label]="translations['previousGame']"
-        >
-          <mat-icon>chevron_left</mat-icon>
-        </button>
+    <div class="carousel-wrapper">
+      <button
+        mat-icon-button
+        class="carousel-control-button prev-button"
+        (click)="prevSlide()"
+        [attr.aria-label]="translations['previousGame']"
+      >
+        <mat-icon>chevron_left</mat-icon>
+      </button>
 
-        @if (displayedGame(); as game) {
-          <div class="game-details">
-            <!-- Acessando o nome e a descrição do jogo com base no idioma atual (agora um signal) -->
-            <h2 class="game-name">
-              {{ game.name[currentLanguage()] }}
-            </h2>
-            <p class="game-description">
-              {{ game.description[currentLanguage()] }}
-            </p>
-            <button
-              mat-raised-button
-              color="primary"
-              (click)="onSelectGame(game.id)"
-              [attr.aria-label]="
-                translations['viewDetailsFor'] +
-                ' ' +
-                game.name[currentLanguage()]
-              "
-            >
-              {{ translations["viewDetails"] }}
-            </button>
+      <div class="carousel-content">
+        @for (game of visibleGames(); track game.id) {
+          <div class="game-card">
+            <img
+              [src]="game.image"
+              [alt]="game.name[currentLanguage()]"
+              class="game-image"
+              onerror="this.onerror=null;this.src='https://placehold.co/400x200/cccccc/000000?text=Imagem+Nao+Disponivel';"
+            />
+            <div class="game-info">
+              <h2 class="game-name">{{ game.name[currentLanguage()] }}</h2>
+              <p class="game-description">
+                {{ game.description[currentLanguage()] }}
+              </p>
+              <button
+                mat-raised-button
+                color="primary"
+                class="view-details-button"
+                [routerLink]="['/games', game.id]"
+                [attr.aria-label]="
+                  translations['viewDetailsFor'] +
+                  ' ' +
+                  game.name[currentLanguage()]
+                "
+              >
+                {{ translations["viewDetails"] }}
+              </button>
+            </div>
           </div>
         }
-
-        <button
-          mat-icon-button
-          (click)="nextSlide()"
-          [disabled]="games.length <= 1"
-          [attr.aria-label]="translations['nextGame']"
-        >
-          <mat-icon>chevron_right</mat-icon>
-        </button>
       </div>
-    </mat-card>
+
+      <button
+        mat-icon-button
+        class="carousel-control-button next-button"
+        (click)="nextSlide()"
+        [attr.aria-label]="translations['nextGame']"
+      >
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
   }
 </div>

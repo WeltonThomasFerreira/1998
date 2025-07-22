@@ -35,9 +35,12 @@ $breakpoint-mobile: 600px;
 $breakpoint-tablet: 960px;
 
 /* Variáveis SCSS para sombras */
-$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-
+$shadow-md:
+  0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-xl:
+  0 20px 25px -5px rgba(0, 0, 0, 0.1),
+  0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
 /* Estilos para o tema claro (aplicados quando a classe 'light-theme' está no <html>) */
 .light-theme {
@@ -62,7 +65,9 @@ $shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 
   --chip-border-color: #ba68c8; // Roxo médio
 
   // Cor do ícone da toolbar para o tema claro (cor do texto principal do cabeçalho)
-  --toolbar-icon-color: var(--primary-text-color); // Ícones da cor do texto do logo (branco)
+  --toolbar-icon-color: var(
+    --primary-text-color
+  ); // Ícones da cor do texto do logo (branco)
   --logo-background-color: #bd93f9; // Roxo do Dracula para o fundo do logo
   --logo-text-color: #000000; // Texto PRETO para o logo
 }
@@ -90,13 +95,16 @@ html.dark-theme {
   --chip-border-color: #ff79c6; // Borda rosa do Dracula
 
   // Cor do ícone da toolbar para o tema escuro (cor do texto principal do cabeçalho)
-  --toolbar-icon-color: var(--primary-text-color); // Ícones da cor do texto do logo (branco)
+  --toolbar-icon-color: var(
+    --primary-text-color
+  ); // Ícones da cor do texto do logo (branco)
   --logo-background-color: #bd93f9; // Roxo do Dracula para o fundo do logo
   --logo-text-color: #000000; // Texto PRETO para o logo
 }
 
 /* Estilos globais para html e body */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   font-family: "Inter", sans-serif; // Usando a fonte Inter
@@ -104,7 +112,9 @@ html, body {
   /* Aplica as variáveis CSS de tema diretamente ao html/body */
   background-color: var(--background-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave para mudança de tema */
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease; /* Transição suave para mudança de tema */
   overflow-x: hidden; /* Evita rolagem horizontal indesejada */
 }
 
@@ -253,7 +263,9 @@ mat-chip-listbox mat-chip {
 // Estilos para MatToolbar
 mat-toolbar {
   background-color: var(--primary-color) !important;
-  color: var(--primary-text-color) !important; // Garante que o texto do toolbar use a cor primária do texto
+  color: var(
+    --primary-text-color
+  ) !important; // Garante que o texto do toolbar use a cor primária do texto
 }
 
 // Estilo para o logo do aplicativo no cabeçalho (Mantido no styles.scss)
@@ -263,11 +275,17 @@ mat-toolbar {
   gap: $spacing-sm; /* Espaçamento entre ícone e texto */
   padding: $spacing-sm $spacing-md; /* Aumentado o padding para mais destaque */
   border-radius: $border-radius-md; /* Borda um pouco mais arredondada */
-  background-color: var(--logo-background-color); // Fundo do logo, definido em styles.scss
-  color: var(--logo-text-color); // Cor do texto do logo, definido em styles.scss
+  background-color: var(
+    --logo-background-color
+  ); // Fundo do logo, definido em styles.scss
+  color: var(
+    --logo-text-color
+  ); // Cor do texto do logo, definido em styles.scss
   font-weight: bold;
   text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
   white-space: nowrap; /* Evita quebra de linha no texto do logo */
 
   &:hover {
@@ -278,7 +296,9 @@ mat-toolbar {
     font-size: $font-size-2xl; /* Ícone maior */
     width: $font-size-2xl;
     height: $font-size-2xl;
-    color: var(--logo-text-color); // Garante que o ícone também use a cor do texto do logo
+    color: var(
+      --logo-text-color
+    ); // Garante que o ícone também use a cor do texto do logo
   }
 
   span {

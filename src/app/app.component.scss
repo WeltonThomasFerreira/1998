@@ -1,12 +1,10 @@
 /* src/app/app.component.scss */
 
-@use "styles.scss" as *; // Importa as variáveis e mixins globais
-
 /* Estilos globais para o tema */
 :host {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100vh; /* Garante que o host ocupe a altura total da viewport */
 }
 
 /* Estilos para o container do sidenav */
@@ -16,17 +14,13 @@
   height: 100%;
   background-color: var(--background-color); // Variável definida em styles.scss
   color: var(--text-color); // Variável definida em styles.scss
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Estilos para o sidenav (menu lateral) */
 .sidenav {
   width: 250px;
-  background-color: var(
-    --card-background-color
-  ); // Variável definida em styles.scss
+  background-color: var(--card-background-color); // Variável definida em styles.scss
   color: var(--text-color); // Variável definida em styles.scss
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -36,7 +30,7 @@
 
 /* Estilos para os itens de navegação no sidenav */
 .mat-nav-list {
-  padding-top: $spacing-md; /* Usando variável SCSS */
+  padding-top: 16px; /* Espaço no topo para o menu */
 }
 
 .mat-list-item {
@@ -47,31 +41,32 @@
 }
 
 .sidenav-controls {
-  padding: $spacing-md; /* Usando variável SCSS */
+  padding: 16px;
   border-top: 1px solid var(--border-color);
   .mat-list-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $spacing-sm 0; /* Usando variável SCSS */
+    padding: 8px 0;
     &:hover {
       background-color: transparent; /* Remove hover para os controles */
     }
   }
   .mat-icon {
-    margin-right: $spacing-md; /* Usando variável SCSS */
+    margin-right: 16px;
   }
   .mat-slide-toggle {
     margin-left: auto; /* Empurra o toggle para a direita */
   }
 }
 
+
 /* Estilos para o conteúdo principal */
 .main-content {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Garante que o conteúdo principal ocupe toda a altura */
-  padding-top: 64px; /* Adiciona padding para compensar o cabeçalho fixo (altura da mat-toolbar) */
+  min-height: 100vh; /* Garante que o conteúdo principal ocupe a altura total da viewport */
+  /* Removido calc(100vh - 64px) para flexbox */
 }
 
 /* Estilos para a toolbar (cabeçalho) */
@@ -79,35 +74,62 @@
   display: flex;
   justify-content: space-between; /* Alinha itens nas extremidades */
   align-items: center; /* Centraliza verticalmente */
-  background-color: var(--primary-color); // Fundo do cabeçalho definido em styles.scss
-  color: var(--primary-text-color); // Cor do texto do cabeçalho definido em styles.scss
-  box-shadow: $shadow-md; // Usando variável SCSS
-  position: fixed; /* Agora o cabeçalho é fixo na viewport */
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky; /* Fixa o cabeçalho no topo */
   top: 0;
-  left: 0; /* Garante que comece no canto esquerdo */
-  width: 100%; /* Ocupa a largura total da viewport */
   z-index: 1000; /* Garante que esteja acima de outros elementos */
-  // REMOVIDO: border-bottom-left-radius: $border-radius-lg;
-  // REMOVIDO: border-bottom-right-radius: $border-radius-lg;
-  padding: 0 $spacing-md; /* Usando variável SCSS */
+  border-bottom-left-radius: 8px; /* Cantos arredondados */
+  border-bottom-right-radius: 8px; /* Cantos arredondados */
+  padding: 0 16px; /* Adiciona padding horizontal diretamente aqui */
 
-  @media (max-width: $breakpoint-mobile) { /* Usando variável SCSS */
-    padding: 0 $spacing-sm; /* Usando variável SCSS */
+  @media (max-width: 768px) {
+    padding: 0 8px; /* Ajuste para mobile */
   }
 }
 
-// Wrapper para centralizar o logo
-.app-logo-wrapper {
-  flex-grow: 1; /* Permite que o wrapper ocupe o espaço disponível */
-  display: flex;
-  justify-content: center; /* Centraliza o logo horizontalmente */
+.app-title-wrapper {
+  flex-grow: 1; /* Permite que o wrapper do título ocupe o espaço disponível */
+  display: flex; /* Adicionado para usar flexbox para centralização real */
+  justify-content: center; /* Centraliza o conteúdo dentro do wrapper */
+  align-items: center; /* Centraliza verticalmente o conteúdo dentro do wrapper */
+}
+
+.app-title-link {
+  display: inline-flex; /* Para que o ícone e o texto fiquem na mesma linha e centralizados */
   align-items: center;
+  text-decoration: none;
+  color: var(--primary-text-color); /* A cor do texto do título deve ser a cor do texto primário */
+  font-size: 24px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--primary-text-color-hover);
+  }
+
+  .app-logo-icon {
+    margin-right: 8px;
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+    .app-logo-icon {
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+  }
 }
 
 .toolbar-right-buttons {
   display: flex;
   align-items: center;
-  gap: $spacing-sm; /* Usando variável SCSS */
+  gap: 8px; /* Espaçamento entre os botões */
 }
 
 /* Estilos para os ícones da toolbar */
@@ -115,16 +137,10 @@
   color: var(--toolbar-icon-color);
 }
 
-/* Estilos para o texto do switch de idioma (EN/PT) */
-.language-button .language-text {
-  font-weight: bold; // Adiciona mais peso ao texto
-  color: var(--toolbar-icon-color); // Mesma cor dos ícones
-}
-
 /* Estilos para a área de conteúdo do roteador */
 .router-content {
-  flex: 1; /* Faz com que o conteúdo ocupe o espaço restante */
-  padding: $spacing-xl; /* Usando variável SCSS */
+  flex: 1; /* Faz com que o conteúdo ocupe o espaço restante, empurrando o rodapé para baixo */
+  padding: 24px;
   max-width: 1200px;
   margin: 0 auto; /* Centraliza o conteúdo */
   width: 100%; /* Garante que ocupe a largura total disponível */
@@ -136,22 +152,31 @@
   background-color: var(--card-background-color);
   color: var(--text-color-secondary);
   text-align: center;
-  padding: $spacing-md; /* Usando variável SCSS */
-  font-size: $font-size-sm; /* Usando variável SCSS */
-  box-shadow: $shadow-md; /* Usando variável SCSS */
-  border-top-left-radius: $border-radius-lg; /* Usando variável SCSS */
-  border-top-right-radius: $border-radius-lg; /* Usando variável SCSS */
-  margin-top: auto; /* Empurra o rodapé para o final */
+  padding: 20px;
+  font-size: 0.9em;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+  border-top-left-radius: 8px; /* Cantos arredondados */
+  border-top-right-radius: 8px; /* Cantos arredondados */
+  margin-top: auto; /* Empurra o rodapé para o final, se o flex-direction for column */
 }
 
 /* Responsividade */
-@media (max-width: $breakpoint-mobile) { /* Usando variável SCSS */
+@media (max-width: 768px) {
   .app-toolbar {
-    padding: 0 $spacing-sm; /* Usando variável SCSS */
+    padding: 0 8px;
+  }
+
+  .app-logo {
+    font-size: 20px;
+    .app-logo-icon {
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
   }
 
   .router-content {
-    padding: $spacing-md; /* Usando variável SCSS */
+    padding: 16px;
   }
 
   .sidenav {
