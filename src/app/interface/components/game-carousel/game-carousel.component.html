@@ -1,0 +1,52 @@
+<!-- src/app/interface/components/game-carousel/game-carousel.component.html -->
+
+<div class="carousel-container">
+  @if (games === null) {
+    <app-loading-spinner></app-loading-spinner>
+  } @else if (games.length === 0) {
+    <mat-card class="carousel-card">
+      <mat-card-content>
+        <p>{{ translations["noFeaturedGames"] }}</p>
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <mat-card class="carousel-card">
+      <div class="carousel-content">
+        <button
+          mat-icon-button
+          (click)="prevSlide()"
+          [disabled]="games.length <= 1"
+          [attr.aria-label]="translations['previousGame']"
+        >
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+
+        @if (displayedGame(); as game) {
+          <div class="game-details">
+            <h2 class="game-name">{{ game.name }}</h2>
+            <p class="game-description">{{ game.description }}</p>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="onSelectGame(game.id)"
+              [attr.aria-label]="
+                translations['viewDetailsFor'] + ' ' + game.name
+              "
+            >
+              {{ translations["viewDetails"] }}
+            </button>
+          </div>
+        }
+
+        <button
+          mat-icon-button
+          (click)="nextSlide()"
+          [disabled]="games.length <= 1"
+          [attr.aria-label]="translations['nextGame']"
+        >
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+  }
+</div>

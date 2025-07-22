@@ -1,0 +1,136 @@
+<!-- src/app/interface/pages/game-list/game-list-page.component.html -->
+
+<div class="game-list-page-container container">
+  <app-breadcrumbs [path]="breadcrumbs"></app-breadcrumbs>
+
+  <h1 class="page-title">{{ translations()["allGames"] }}</h1>
+
+  <div class="filters-container">
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>{{ translations()["searchByName"] }}</mat-label>
+      <input
+        matInput
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="applyFilters()"
+        placeholder="{{ translations()['searchByName'] }}"
+        [attr.aria-label]="translations()['searchByName']"
+      />
+      @if (searchTerm()) {
+        <button
+          matSuffix
+          mat-icon-button
+          (click)="searchTerm.set(''); applyFilters()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ translations()["filterByCategory"] }}</mat-label>
+      <mat-select
+        [(ngModel)]="selectedCategoryType"
+        (ngModelChange)="selectedCategoryValue.set(''); applyFilters()"
+        [attr.aria-label]="translations()['selectCategory']"
+      >
+        <mat-option [value]="''">{{
+          translations()["allCategories"]
+        }}</mat-option>
+        @for (categoryType of availableCategoryTypes(); track categoryType) {
+          <mat-option [value]="categoryType">{{
+            translations()[categoryType]
+          }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    @if (selectedCategoryType()) {
+      <mat-form-field appearance="outline">
+        <mat-label>{{ translations()["filterByValue"] }}</mat-label>
+        <mat-select
+          [(ngModel)]="selectedCategoryValue"
+          (ngModelChange)="applyFilters()"
+          [attr.aria-label]="translations()['selectCategoryValue']"
+        >
+          <mat-option [value]="''">{{
+            translations()["allValues"]
+          }}</mat-option>
+          @for (
+            categoryValue of availableCategoryValues();
+            track categoryValue
+          ) {
+            <mat-option [value]="categoryValue">{{ categoryValue }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+  </div>
+
+  @if (isLoading()) {
+    <app-loading-spinner></app-loading-spinner>
+  } @else if (displayedGames().length === 0) {
+    <p class="no-games-message">{{ translations()["noGamesFound"] }}</p>
+  } @else {
+    <div class="games-grid">
+      @for (game of displayedGames(); track game.id) {
+        <mat-card class="game-card" (click)="navigateToGameDetail(game.id)">
+          <img
+            mat-card-image
+            [src]="game.image"
+            alt="{{ game.name }}"
+            class="game-image"
+          />
+          <mat-card-header>
+            <mat-card-title>{{ game.name }}</mat-card-title>
+            <mat-card-subtitle
+              >{{ game.players }} | {{ game.type }}</mat-card-subtitle
+            >
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ game.description }}</p>
+            <div class="game-categories">
+              @for (
+                categoryType of availableCategoryTypes()
+                  | filterCategoryTypes: game.categories;
+                track categoryType
+              ) {
+                <span class="game-chip"
+                  >{{ translations()[categoryType] }}:
+                  {{ game.categories[categoryType] }}</span
+                >
+              }
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button
+              mat-flat-button
+              color="primary"
+              [attr.aria-label]="
+                translations()['viewDetailsFor'] + ' ' + game.name
+              "
+            >
+              {{ translations()["viewDetails"] }}
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+
+    @if (canLoadMore()) {
+      <div class="load-more-container">
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="loadMoreGames()"
+          [disabled]="isLoadingMore()"
+        >
+          @if (isLoadingMore()) {
+            <mat-spinner [diameter]="20"></mat-spinner>
+          } @else {
+            {{ translations()["loadMore"] }}
+          }
+        </button>
+      </div>
+    }
+  }
+</div>

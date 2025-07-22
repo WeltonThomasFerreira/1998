@@ -1,0 +1,174 @@
+/* src/app/interface/pages/game-list/game-list-page.component.scss */
+
+@use "styles.scss" as *; // Importa as variáveis e mixins globais
+
+.game-list-page-container {
+  padding-top: $spacing-md;
+}
+
+.page-title {
+  font-size: $font-size-4xl;
+  font-weight: bold;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: $spacing-xl;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: $font-size-3xl;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.filters-container {
+  display: flex;
+  flex-wrap: wrap; // Permite quebra de linha em telas pequenas
+  gap: $spacing-md; // Espaçamento entre os campos
+  margin-bottom: $spacing-xl;
+  justify-content: center; // Centraliza os filtros
+  padding: $spacing-md;
+  background-color: var(--card-background-color);
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-md;
+
+  mat-form-field {
+    flex: 1 1 250px; // Permite que os campos cresçam e diminuam, com largura base de 250px
+    max-width: 300px; // Limita a largura máxima para campos individuais
+
+    @media (max-width: $breakpoint-mobile) {
+      flex: 1 1 100%; // Ocupa a largura total em telas pequenas
+      max-width: none;
+    }
+  }
+
+  .search-input {
+    flex: 2 1 300px; // Campo de busca um pouco maior
+    max-width: 400px;
+  }
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(280px, 1fr)
+  ); // Colunas responsivas
+  gap: $spacing-lg; // Espaçamento entre os cards
+  padding: $spacing-md 0; // Padding vertical
+}
+
+.game-card {
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-md;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%; // Garante que todos os cards tenham a mesma altura na linha
+  justify-content: space-between; // Empurra o conteúdo para cima e as ações para baixo
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .game-image {
+    width: 100%;
+    height: 180px; // Altura fixa para as imagens
+    object-fit: cover; // Garante que a imagem cubra a área sem distorção
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  mat-card-header {
+    padding: $spacing-md;
+    .mat-card-title {
+      font-size: $font-size-xl;
+      font-weight: bold;
+      color: var(--text-color);
+    }
+    .mat-card-subtitle {
+      color: var(--text-color-secondary);
+    }
+  }
+
+  mat-card-content {
+    padding: 0 $spacing-md $spacing-md;
+    flex-grow: 1; // Permite que o conteúdo cresça
+    p {
+      font-size: $font-size-sm;
+      color: var(--text-color);
+      margin-bottom: $spacing-sm;
+    }
+  }
+
+  .game-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-top: $spacing-sm;
+  }
+
+  .game-chip {
+    background-color: var(--chip-background);
+    color: var(--chip-text);
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-md;
+    font-size: $font-size-xs;
+    white-space: nowrap;
+    border: 1px solid var(--chip-border-color);
+  }
+
+  mat-card-actions {
+    padding: $spacing-md;
+    display: flex;
+    justify-content: flex-end; // Alinha o botão à direita
+    border-top: 1px solid var(--border-color);
+
+    button {
+      font-size: $font-size-sm;
+      padding: $spacing-sm $spacing-md;
+      border-radius: $border-radius-sm;
+    }
+  }
+}
+
+.no-games-message {
+  font-size: $font-size-lg;
+  color: var(--text-color-secondary);
+  text-align: center;
+  margin-top: $spacing-xl;
+  padding: $spacing-md;
+  background-color: var(--card-background-color);
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
+}
+
+.load-more-container {
+  text-align: center;
+  margin-top: $spacing-xl;
+  margin-bottom: $spacing-xl;
+
+  button {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-lg;
+    border-radius: $border-radius-md;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      width: 100%;
+      font-size: $font-size-md;
+      padding: $spacing-sm $spacing-lg;
+    }
+  }
+}

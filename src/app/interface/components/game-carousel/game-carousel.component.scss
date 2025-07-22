@@ -1,0 +1,107 @@
+/* src/app/interface/components/game-carousel/game-carousel.component.scss */
+
+@use "styles.scss" as *; // Importa as variáveis e mixins globais
+
+.carousel-container {
+  width: 100%;
+  max-width: 960px; // $breakpoint-tablet
+  margin: $spacing-xl auto;
+  padding: $spacing-md;
+  box-sizing: border-box;
+
+  @media (min-width: $breakpoint-mobile) {
+    padding: $spacing-lg;
+  }
+}
+
+.carousel-card {
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); // Sombra mais pronunciada
+  transition: transform 0.3s ease;
+  min-height: 250px; // Altura mínima para o card do carrossel
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza o spinner se não houver jogos */
+}
+
+.carousel-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: $spacing-md;
+
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+    text-align: center;
+    padding: $spacing-sm;
+  }
+}
+
+.game-details {
+  flex-grow: 1;
+  text-align: center;
+  padding: 0 $spacing-md;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: $spacing-md 0;
+  }
+}
+
+.game-name {
+  font-size: $font-size-3xl;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: $spacing-sm;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: $font-size-2xl;
+  }
+}
+
+.game-description {
+  font-size: $font-size-md;
+  color: var(--text-color-secondary);
+  margin-bottom: $spacing-md;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: $font-size-sm;
+  }
+}
+
+button[mat-icon-button] {
+  color: var(--primary-color);
+  background-color: var(--hover-background-color);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  min-width: 48px; // Garante tamanho mínimo
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+    transform: scale(1.1);
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    margin: $spacing-sm 0;
+  }
+}
+
+button[mat-raised-button] {
+  padding: $spacing-sm $spacing-lg;
+  font-size: $font-size-md;
+  border-radius: $border-radius-md;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}

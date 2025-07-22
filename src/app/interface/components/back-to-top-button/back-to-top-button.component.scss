@@ -1,0 +1,38 @@
+/* src/app/interface/components/back-to-top-button/back-to-top-button.component.scss */
+
+@use "styles.scss" as *; // Importa as variáveis e mixins globais usando o alias @styles
+
+.back-to-top-button {
+  position: fixed;
+  bottom: $spacing-xl;
+  right: $spacing-xl;
+  z-index: 999; // Garante que esteja acima de outros elementos
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  opacity: 1; // Visível por padrão quando o @if é true
+  transform: translateY(0); // Posição inicial
+
+  // Estilos para o botão FAB do Material
+  &.mat-fab {
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      transform: translateY(-2px);
+    }
+  }
+
+  /* Responsividade */
+  @media (max-width: $breakpoint-mobile) {
+    bottom: $spacing-lg;
+    right: $spacing-lg;
+    width: 48px; // Tamanho menor para mobile
+    height: 48px;
+    .mat-icon {
+      font-size: 24px;
+    }
+  }
+}

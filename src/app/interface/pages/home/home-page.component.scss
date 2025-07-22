@@ -1,0 +1,57 @@
+/* src/app/interface/pages/home/home-page.component.scss */
+
+@use "styles.scss" as *; // Importa as variáveis e mixins globais
+
+.home-page-container {
+  text-align: center;
+  padding-top: $spacing-xl; // Espaçamento no topo
+}
+
+.page-title {
+  font-size: $font-size-4xl;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: $spacing-xl;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: $font-size-3xl;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.all-games-button-container {
+  margin-top: $spacing-xl * 2; // Mais espaço abaixo do carrossel
+  margin-bottom: $spacing-xl;
+
+  button {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-lg;
+    border-radius: $border-radius-md;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      width: 100%;
+      font-size: $font-size-md;
+      padding: $spacing-sm $spacing-lg;
+    }
+  }
+}
+
+.no-games-message {
+  font-size: $font-size-lg;
+  color: var(--text-color-secondary);
+  margin-top: $spacing-xl;
+  padding: $spacing-md;
+  background-color: var(--card-background-color);
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
+}

@@ -1,0 +1,27 @@
+<!-- src/app/interface/components/breadcrumbs/breadcrumbs.component.html -->
+
+<nav class="breadcrumbs-nav" aria-label="breadcrumb">
+  <ol class="breadcrumbs-list">
+    @for (item of path; track item.name; let i = $index) {
+      <li class="breadcrumbs-item">
+        @if (i > 0) {
+          <mat-icon class="separator-icon">chevron_right</mat-icon>
+        }
+        @if (item.path) {
+          <a
+            [routerLink]="item.path"
+            class="breadcrumb-link"
+            aria-current="false"
+            tabindex="0"
+          >
+            {{ item.name }}
+          </a>
+        } @else {
+          <span class="breadcrumb-current" aria-current="page">{{
+            item.name
+          }}</span>
+        }
+      </li>
+    }
+  </ol>
+</nav>

@@ -1,0 +1,18 @@
+/* src/app/interface/components/loading-spinner/loading-spinner.component.scss */
+
+@use "styles.scss" as *; // Importa as variáveis e mixins globais
+
+.loading-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $spacing-xl;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* O spinner do Angular Material já tem seus próprios estilos,
+   mas você pode sobrescrever se precisar de personalização. */
+mat-spinner {
+  color: var(--primary-color); /* Usa a cor primária do tema */
+}

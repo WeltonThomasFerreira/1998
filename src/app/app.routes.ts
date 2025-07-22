@@ -1,20 +1,22 @@
-import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { GameDetailsComponent } from './pages/game-details/game-details.component';
-import { LayoutComponent } from './components/layout/layout.component';
+// src/app/app.routes.ts
 
+import { Routes } from '@angular/router';
+
+// Importa os componentes de página, que agora serão standalone, usando aliases
+import { HomePageComponent } from '@interface/pages/home/home-page.component';
+import { GameListPageComponent } from '@interface/pages/game-list/game-list-page.component';
+import { GameDetailPageComponent } from '@interface/pages/game-detail/game-detail-page.component'; // Corrigido
+import { AboutPageComponent } from '@interface/pages/about/about-page.component';
+
+/**
+ * Definição das rotas da aplicação.
+ * Utiliza a nova API de roteamento funcional do Angular.
+ */
 export const routes: Routes = [
-  {
-    path: '',
-    component: LayoutComponent,
-    children: [
-      { path: '', component: HomeComponent, title: '1998 - Início' },
-      {
-        path: 'game/:id',
-        component: GameDetailsComponent,
-        title: '1998 - Detalhes do Jogo',
-      },
-    ],
-  },
-  { path: '**', redirectTo: '' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomePageComponent },
+  { path: 'games', component: GameListPageComponent },
+  { path: 'games/:id', component: GameDetailPageComponent },
+  { path: 'about', component: AboutPageComponent },
+  { path: '**', redirectTo: '/home' },
 ];

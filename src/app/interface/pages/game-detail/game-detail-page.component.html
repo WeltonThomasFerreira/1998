@@ -1,0 +1,52 @@
+<!-- src/app/interface/pages/game-detail/game-detail-page.component.html -->
+
+<div class="game-detail-page-container container">
+  <app-breadcrumbs [path]="breadcrumbs()"></app-breadcrumbs>
+
+  @if (isLoading()) {
+    <app-loading-spinner></app-loading-spinner>
+  } @else if (!game()) {
+    <mat-card class="game-not-found-card">
+      <mat-card-content>
+        <h2 class="game-not-found-title">
+          {{ translations()["gameNotFound"] }}
+        </h2>
+        <p>{{ translations()["gameNotFound"] }}</p>
+        <button mat-raised-button color="warn" (click)="backToList()">
+          {{ translations()["backToList"] }}
+        </button>
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <mat-card class="game-details-card">
+      <mat-card-header>
+        <mat-card-title class="game-title">{{ game()!.name }}</mat-card-title>
+        <mat-card-subtitle class="game-players-type">
+          {{ game()!.players }} | {{ game()!.type }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="game-description">{{ game()!.description }}</p>
+
+        <mat-divider></mat-divider>
+
+        <h2 class="how-to-play-title">{{ translations()["howToPlay"] }}</h2>
+        <!-- Renderiza o conteúdo Markdown das regras do jogo -->
+        <div class="markdown-content">
+          <markdown [src]="game()!.rulesPath"></markdown>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="game-actions">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="backToList()"
+          [attr.aria-label]="translations()['backToList']"
+        >
+          {{ translations()["backToList"] }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <app-back-to-top-button></app-back-to-top-button>
+  }
+</div>
