@@ -1,5 +1,3 @@
-// src/app/domain/data/games.data.ts
-
 import { Game, GAME_CATEGORIES } from '@domain/models/game.model';
 
 export const GAMES_DATA: Game[] = [
@@ -15,9 +13,9 @@ export const GAMES_DATA: Game[] = [
     image: 'https://placehold.co/400x200/ADD8E6/000000?text=Yaniv',
     rulesPath: 'yaniv.md',
     categories: {
-      [GAME_CATEGORIES.NUMBER_OF_PLAYERS]: 'two_to_five_players', // Nova chave em inglês
-      [GAME_CATEGORIES.TYPE]: 'cards_type', // Nova chave em inglês
-      [GAME_CATEGORIES.NUMBER_OF_DECKS]: 'one_deck', // Nova chave em inglês
+      [GAME_CATEGORIES.NUMBER_OF_PLAYERS]: 'two_to_five_players',
+      [GAME_CATEGORIES.TYPE]: 'cards_type',
+      [GAME_CATEGORIES.NUMBER_OF_DECKS]: 'one_deck',
     },
     featured: true,
   },

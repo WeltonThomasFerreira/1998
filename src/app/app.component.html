@@ -1,79 +1,69 @@
 <!-- src/app/app.component.html -->
 
+<!-- Mat Sidenav Container para o layout da página e menu lateral -->
 <mat-sidenav-container class="sidenav-container">
-  <!-- Sidenav de navegação -->
-  <mat-sidenav #sidenav mode="over" class="sidenav">
-    <mat-toolbar class="sidenav-toolbar">
-      <span class="app-name-sidenav">{{ translations().appName }}</span>
-      <button
-        mat-icon-button
-        (click)="closeSidenav()"
-        [attr.aria-label]="translations()['closeMenu']"
-      >
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-toolbar>
-
-    <mat-nav-list (click)="closeSidenav()">
-      <a
-        mat-list-item
-        routerLink="/home"
-        routerLinkActive="active-link"
-        [attr.aria-label]="translations().home"
-      >
-        <mat-icon matListItemIcon>home</mat-icon>
-        <span matListItemTitle>{{ translations().home }}</span>
+  <!-- Menu Lateral (Sidenav) -->
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    position="end"
+    class="sidenav"
+    [fixedInViewport]="true"
+    [fixedTopGap]="64"
+    aria-label="Menu de Navegação Principal"
+  >
+    <mat-nav-list>
+      <!-- Correção: Usar notação de colchetes para acessar propriedades do objeto de tradução -->
+      <a mat-list-item routerLink="/home" (click)="closeSidenav()" [attr.aria-label]="translations()['home']">
+        <mat-icon>home</mat-icon> {{ translations()['home'] }}
       </a>
-      <a
-        mat-list-item
-        routerLink="/games"
-        routerLinkActive="active-link"
-        [attr.aria-label]="translations().games"
-      >
-        <mat-icon matListItemIcon>casino</mat-icon>
-        <span matListItemTitle>{{ translations().games }}</span>
+      <!-- Correção: Usar notação de colchetes para acessar propriedades do objeto de tradução -->
+      <a mat-list-item routerLink="/games" (click)="closeSidenav()" [attr.aria-label]="translations()['games']">
+        <mat-icon>casino</mat-icon> {{ translations()['games'] }}
       </a>
-      <a
-        mat-list-item
-        routerLink="/about"
-        routerLinkActive="active-link"
-        [attr.aria-label]="translations().about"
-      >
-        <mat-icon matListItemIcon>info</mat-icon>
-        <span matListItemTitle>{{ translations().about }}</span>
+      <!-- Correção: Usar notação de colchetes para acessar propriedades do objeto de tradução -->
+      <a mat-list-item routerLink="/about" (click)="closeSidenav()" [attr.aria-label]="translations()['about']">
+        <mat-icon>info</mat-icon> {{ translations()['about'] }}
       </a>
     </mat-nav-list>
 
     <mat-divider></mat-divider>
 
-    <mat-list>
+    <!-- Switches de Tema e Idioma -->
+    <div class="sidenav-controls">
       <mat-list-item>
         <mat-icon matListItemIcon>brightness_4</mat-icon>
-        <span matListItemTitle>{{ translations().theme }}</span>
+        <!-- Correção: Usar notação de colchetes para acessar propriedades do objeto de tradução -->
+        <span matListItemTitle>{{ translations()['toggleTheme'] }}</span>
         <mat-slide-toggle
+          matListItemAfter
           [checked]="isDarkTheme()"
           (change)="toggleTheme()"
           [attr.aria-label]="translations()['toggleTheme']"
-        ></mat-slide-toggle>
+        >
+        </mat-slide-toggle>
       </mat-list-item>
 
       <mat-list-item>
         <mat-icon matListItemIcon>language</mat-icon>
-        <span matListItemTitle>{{ translations().language }}</span>
+        <!-- Correção: Usar notação de colchetes para acessar propriedades do objeto de tradução -->
+        <span matListItemTitle>{{ translations()['toggleLanguage'] }}</span>
         <mat-slide-toggle
+          matListItemAfter
           [checked]="currentLanguage() === 'en'"
           (change)="toggleLanguage()"
           [attr.aria-label]="translations()['toggleLanguage']"
         >
-          {{ currentLanguage() === "pt" ? "PT" : "EN" }}
         </mat-slide-toggle>
       </mat-list-item>
-    </mat-list>
+    </div>
   </mat-sidenav>
 
-  <!-- Conteúdo principal -->
+  <!-- Conteúdo Principal da Página -->
   <mat-sidenav-content class="main-content">
+    <!-- Cabeçalho (Toolbar) -->
     <mat-toolbar color="primary" class="app-toolbar">
+      <!-- Botão de Hambúrguer (Esquerda) -->
       <button
         mat-icon-button
         (click)="sidenav.toggle()"
@@ -85,36 +75,45 @@
       >
         <mat-icon>menu</mat-icon>
       </button>
-      <a
-        routerLink="/home"
-        class="app-title-link"
-        [attr.aria-label]="translations().appName"
-      >
-        <mat-icon class="app-logo-icon">games</mat-icon>
-        <span class="app-name">{{ translations().appName }}</span>
-      </a>
-      <span class="toolbar-spacer"></span>
-      <!-- Botões de tema e idioma na toolbar para desktop -->
-      <button
-        mat-icon-button
-        (click)="toggleTheme()"
-        class="hide-on-mobile"
-        [attr.aria-label]="translations()['toggleTheme']"
-      >
-        <mat-icon>{{ isDarkTheme() ? "light_mode" : "dark_mode" }}</mat-icon>
-      </button>
-      <button
-        mat-button
-        (click)="toggleLanguage()"
-        class="language-button hide-on-mobile"
-        [attr.aria-label]="translations()['toggleLanguage']"
-      >
-        {{ currentLanguage() === "pt" ? "PT" : "EN" }}
-      </button>
+
+      <!-- Logo/Nome do Aplicativo (Centralizado) -->
+      <div class="app-logo-wrapper">
+        <a routerLink="/home" class="app-logo" [attr.aria-label]="'1998'">
+          <!-- Removido o ícone 'games' para exibir apenas o texto '1998' -->
+          <span>1998</span>
+        </a>
+      </div>
+
+      <!-- Botões de Tema e Idioma (Direita) -->
+      <div class="toolbar-right-buttons">
+        <button
+          mat-icon-button
+          (click)="toggleTheme()"
+          class="hide-on-mobile"
+          [attr.aria-label]="translations()['toggleTheme']"
+        >
+          <mat-icon>{{ isDarkTheme() ? "light_mode" : "dark_mode" }}</mat-icon>
+        </button>
+        <button
+          mat-button
+          (click)="toggleLanguage()"
+          class="language-button hide-on-mobile"
+          [attr.aria-label]="translations()['toggleLanguage']"
+        >
+          {{ currentLanguage() === "pt" ? "PT" : "EN" }}
+        </button>
+      </div>
     </mat-toolbar>
 
+    <!-- Área de Conteúdo da Rota -->
     <main class="router-content">
       <router-outlet></router-outlet>
     </main>
+
+    <!-- Rodapé -->
+    <footer class="app-footer">
+      <!-- Correção: Usar notação de colchetes para acessar propriedades do objeto de tradução -->
+      <p>{{ translations()['footerText'] }}</p>
+    </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
